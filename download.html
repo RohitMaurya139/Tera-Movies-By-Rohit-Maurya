@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TeraMovies | Download</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo-search">
+      <a href="index.html"><div class="logo">TERA<span class="glow">MOVIES</span></div></a>
+    </div>
+    <div class="top-buttons">
+      <button class="btn" id="redbtn">Bollywood</button>
+      <button class="btn" id="greenbtn">Hollywood</button>
+    </div>
+  </header>
+
+  <section class="downloadSection">
+    <h1>Movie Download Section</h1>
+  </section>
+
+  <section class="movies">
+    <div class="movie-card">
+      <div class="main-poster">
+        <img src="" alt="Movie Poster" class="main-movie-img" />
+      </div>
+
+      <h2 class="movie-title">Loading...</h2>
+
+      <div class="download-links">
+        <!-- Buttons will be added here -->
+      </div>
+
+      <div class="description">
+        <h2>Description</h2>
+        <p class="movie-description">Loading movie details...</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">DMCA</a>
+      <a href="#">Contact</a>
+    </div>
+    <p>&copy; 2025 TeraMovies. All rights reserved.</p>
+  </footer>
+
+  <script>
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+
+    const SHEET_URL = "https://opensheet.elk.sh/1JKDl8BP0YryYs5aOhVqV0K4zAhW0Qj3vhvo96Hx4lII/Original";
+
+    async function loadMovieDetails() {
+      const index = new URLSearchParams(window.location.search).get("i");
+      const res = await fetch(SHEET_URL);
+      const data = await res.json();
+      const movie = data[parseInt(index)];
+
+      if (!movie) return;
+
+      document.querySelector(".main-movie-img").src = movie["Poster URL"];
+      document.querySelector(".movie-title").textContent = movie["Title"];
+      document.querySelector(".movie-description").textContent = movie["Storyline"];
+
+      document.querySelector(".download-links").innerHTML = `
+        <a href="${movie["Download 480p"]}" class="btn">Download 480p</a>
+        <a href="${movie["Download 720p"]}" class="btn">Download 720p</a>
+        <a href="${movie["Download 1080p"]}" class="btn">Download 1080p</a>
+      `;
+    }
+
+    loadMovieDetails();
+  </script>
+</body>
+</html>

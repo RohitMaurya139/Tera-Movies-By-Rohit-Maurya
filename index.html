@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TeraMovies Mini App</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo-search">
+      <a href="index.html"><div class="logo">TERA<span class="glow">MOVIES</span></div></a>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search movies..." />
+        <button onclick="filterMovies()" title="Search" aria-label="Search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <span class="visually-hidden">Search</span>
+        </button>
+      </div>
+    </div>
+    <div class="top-buttons">
+      <button class="btn" id="redbtn">Bollywood</button>
+      <button class="btn" id="greenbtn">Hollywood</button>
+    </div>
+  </header>
+
+<!-- 🔽 Menu Navigation -->
+<nav class="menu-bar">
+  <div class="menu-item"><i class="fas fa-home"></i> Home</div>
+  <div class="menu-item"><i class="fas fa-film"></i> Movies</div>
+  <div class="menu-item"><i class="fas fa-link"></i> Genre</div>
+  <div class="menu-item"><i class="fas fa-skull-crossbones"></i> Quality</div>
+  <div class="menu-item"><i class="fas fa-calendar-alt"></i> Year</div>
+  <div class="menu-item"><i class="fas fa-tv"></i> TV Shows</div>
+  <div class="menu-item"><i class="fas fa-globe"></i> Web Series</div>
+  <div class="menu-item">Bollywood</div>
+</nav>
+
+<!-- 🔽 Filter Buttons -->
+<section class="filter-buttons">
+  <button class="telegram-btn">
+    <i class="fab fa-telegram-plane"></i> JOIN TELEGRAM
+  </button>
+
+  <button class="filter-btn">Dual Audio</button>
+  <button class="filter-btn">Web Series</button>
+  <button class="filter-btn">18+ Movies</button>
+  <button class="filter-btn">300MB Movies</button>
+  <button class="filter-btn">480p Movies</button>
+  <button class="filter-btn">720p Movies</button>
+  <button class="filter-btn">1080p Movies</button>
+  <button class="filter-btn">Hindi Series</button>
+  <button class="filter-btn">Bollywood</button>
+</section>
+
+
+
+  <section class="cards" id="movieContainer">
+    <!-- Cards will be loaded dynamically here -->
+  </section>
+<div id="pagination" class="pagination-nav"></div>
+  <footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-links">
+      <a href="#">About Us</a>
+          <a href="#">Report Broken Links</a>
+          <a href="#">Request Us</a>
+          <a href="#">DMCA</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Site Disclaimer</a>
+    </div>
+    <p>&copy; 2025 TeraMovies. All rights reserved.</p>
+  </div>
+</footer>
+
+
+  <script>
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+
+    const SHEET_URL = "https://opensheet.elk.sh/1JKDl8BP0YryYs5aOhVqV0K4zAhW0Qj3vhvo96Hx4lII/Original";
+    let movieData = [];
+
+const MOVIES_PER_PAGE = 30;
+let currentPage = 1;
+
+function renderMovies(movies, page = 1) {
+  const container = document.getElementById("movieContainer");
+  const start = (page - 1) * MOVIES_PER_PAGE;
+  const end = page * MOVIES_PER_PAGE;
+  const moviesToShow = movies.slice(start, end);
+
+  container.innerHTML = moviesToShow.map((m, i) => `
+    <article class="card">
+      <img src="${m['Poster URL']}" alt="${m['Title']}">
+      <h2>${m['Title']}</h2>
+      <p>${m['Genre']} • ${m['Tags']} • ⭐ ${m['Rating']}</p>
+      <a href="download.html?i=${i}">Download</a>
+    </article>
+  `).join("");
+
+  renderPagination(movies.length);
+}
+
+function renderPagination(totalMovies) {
+  const pagination = document.getElementById("pagination");
+  const totalPages = Math.ceil(totalMovies / MOVIES_PER_PAGE);
+  let buttons = "";
+
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1) {
+      // Page 1 stays on index.html
+      buttons += `<a href="index.html"><button class="page-btn">${i}</button></a>`;
+    } else {
+      // Page 2 and onward go to post.html?page=2, etc.
+      buttons += `<a href="post.html?page=${i}"><button class="page-btn">${i}</button></a>`;
+    }
+  }
+
+  pagination.innerHTML = buttons;
+}
+
+
+function goToPage(page) {
+  currentPage = page;
+  renderMovies(movieData, currentPage);
+}
+
+async function loadMovies() {
+  const res = await fetch(SHEET_URL);
+  movieData = await res.json();
+  renderMovies(movieData, currentPage);
+}
+
+
+    function filterMovies() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const filtered = movieData.filter(m =>
+        m["Title"].toLowerCase().includes(query) ||
+        m["Genre"].toLowerCase().includes(query) ||
+        m["Tags"].toLowerCase().includes(query)
+      );
+      renderMovies(filtered);
+    }
+
+    loadMovies();
+  </script>
+</body>
+</html>
