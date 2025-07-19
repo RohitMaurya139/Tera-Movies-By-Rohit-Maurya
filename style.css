@@ -90,6 +90,7 @@
   
   /* Menu bar */
   /* Menu bar styles */
+
 .menu-bar {
   display: flex;
   flex-wrap: wrap;
@@ -196,6 +197,52 @@
   .menu-bar {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+.menu-bar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #111;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.menu-item {
+  color: #fff;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  transition: background 0.3s;
+}
+
+.menu-item:hover {
+  background-color: #222;
+  border-radius: 5px;
+}
+
+.menu-item i {
+  margin-right: 5px;
+}
+
+/* Make buttons look like divs */
+.menu-item.filter-button {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+.menu-item.filter-button:hover {
+  background-color: #222;
+  border-radius: 5px;
 }
 
     /* movie card */
