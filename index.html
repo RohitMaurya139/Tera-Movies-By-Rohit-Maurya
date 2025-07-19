@@ -144,6 +144,21 @@ async function loadMovies() {
     }
 
     loadMovies();
+    function applyFilter(type, value) {
+  const filtered = movieData.filter(movie =>
+    movie[type] && movie[type].toLowerCase().includes(value.toLowerCase())
+  );
+  renderMovies(filtered);
+}
+
+// Add event listener to all filter buttons
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("filter-button")) {
+    const type = e.target.getAttribute("data-type");
+    const value = e.target.getAttribute("data-value");
+    applyFilter(type, value);
+  }
+});
   </script>
 </body>
 </html>
