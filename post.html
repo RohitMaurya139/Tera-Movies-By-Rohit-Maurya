@@ -23,10 +23,29 @@
     </div>
 
     <div class="top-buttons">
-      <button class="btn red" id="redbtn">Bollywood</button>
-      <button class="btn green" id="greenbtn">AnimeFlix</button>
+      <button class="btn filter-button" data-type="Category" data-value="Bollywood">Bollywood</button>
+  <button class="btn filter-button" data-type="Category" data-value="Hollywood">Hollywood</button>
     </div>
   </header>
+    <nav class="menu-bar">
+
+   <button class="menu-item filter-button" data-type="Genre" data-value="Action"><i class="fas fa-link"></i> Genre</button>
+  <button class="menu-item filter-button" data-type="Year" data-value="2024"><i class="fas fa-calendar-alt"></i> Year</button>
+
+  <div class="menu-item"><i class="fas fa-globe"></i> Web Series</div>
+</nav>
+
+<!-- 🔽 Filter Buttons -->
+<section class="filter-buttons">
+  <button class="telegram-btn">
+    <i class="fab fa-telegram-plane"></i> JOIN TELEGRAM
+  </button>
+
+
+  <button class="filter-btn">Web Series</button>
+
+</section>
+
       <section class="cards" id="movieContainer">
   <!-- Movies will be loaded here -->
 </section>
@@ -95,7 +114,26 @@ async function loadMovies() {
 }
 
 loadMovies();
+    
+function applyFilter(type, value) {
+  const filtered = movieData.filter(movie =>
+    movie[type] && movie[type].toLowerCase().includes(value.toLowerCase())
+  );
+  renderMovies(filtered);
+}
+
+// Add event listener to all filter buttons
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("filter-button")) {
+    const type = e.target.getAttribute("data-type");
+    const value = e.target.getAttribute("data-value");
+    applyFilter(type, value);
+  }
+});
+
+
 </script>
+ <script src='https://libtl.com/sdk.js' data-zone='9616697' data-sdk='show_9616697'></script>
 
 
 </body>

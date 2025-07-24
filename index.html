@@ -25,21 +25,18 @@
       </div>
     </div>
     <div class="top-buttons">
-      <button class="btn" id="redbtn">Bollywood</button>
-      <button class="btn" id="greenbtn">Hollywood</button>
+      <button class="btn filter-button" data-type="Category" data-value="Bollywood">Bollywood</button>
+  <button class="btn filter-button" data-type="Category" data-value="Hollywood">Hollywood</button>
     </div>
   </header>
 
 <!-- 🔽 Menu Navigation -->
 <nav class="menu-bar">
-  <div class="menu-item"><i class="fas fa-home"></i> Home</div>
-  <div class="menu-item"><i class="fas fa-film"></i> Movies</div>
-  <div class="menu-item"><i class="fas fa-link"></i> Genre</div>
-  <div class="menu-item"><i class="fas fa-skull-crossbones"></i> Quality</div>
-  <div class="menu-item"><i class="fas fa-calendar-alt"></i> Year</div>
-  <div class="menu-item"><i class="fas fa-tv"></i> TV Shows</div>
+
+  <button class="menu-item filter-button" data-type="Genre" data-value="Action"><i class="fas fa-link"></i> Genre</button>
+  <button class="menu-item filter-button" data-type="Year" data-value="2024"><i class="fas fa-calendar-alt"></i> Year</button>
+  
   <div class="menu-item"><i class="fas fa-globe"></i> Web Series</div>
-  <div class="menu-item">Bollywood</div>
 </nav>
 
 <!-- 🔽 Filter Buttons -->
@@ -48,15 +45,9 @@
     <i class="fab fa-telegram-plane"></i> JOIN TELEGRAM
   </button>
 
-  <button class="filter-btn">Dual Audio</button>
+ 
   <button class="filter-btn">Web Series</button>
-  <button class="filter-btn">18+ Movies</button>
-  <button class="filter-btn">300MB Movies</button>
-  <button class="filter-btn">480p Movies</button>
-  <button class="filter-btn">720p Movies</button>
-  <button class="filter-btn">1080p Movies</button>
-  <button class="filter-btn">Hindi Series</button>
-  <button class="filter-btn">Bollywood</button>
+
 </section>
 
 
@@ -150,6 +141,23 @@ async function loadMovies() {
     }
 
     loadMovies();
+    function applyFilter(type, value) {
+  const filtered = movieData.filter(movie =>
+    movie[type] && movie[type].toLowerCase().includes(value.toLowerCase())
+  );
+  renderMovies(filtered);
+}
+
+// Add event listener to all filter buttons
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("filter-button")) {
+    const type = e.target.getAttribute("data-type");
+    const value = e.target.getAttribute("data-value");
+    applyFilter(type, value);
+  }
+});
   </script>
+  <script src='https://libtl.com/sdk.js' data-zone='9616697' data-sdk='show_9616697'></script>
+
 </body>
 </html>
