@@ -1,139 +1,417 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovieVerse| Movie-Page</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MovieVerse | Movie-Page</title>
+       
     <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="Capture.PNG" type="image/x-icon">
-  <!-- Free Font Awesome CDN (No account needed) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css" />
-
-</head>
-<body>
-  <header class="navbar">
-    <div class="logo-search">
-      <a href="index.html"><div class="logo">MOVIES<span class="glow">VERSE</span></div></a>
-      
-      <div class="search-box">
-        <input type="text" placeholder="What are you looking for?" />
-        <button title="Search"><i class="fas fa-search"></i></button>
-      </div>
-     
-    </div>
-
-    <div class="top-buttons">
-      <button class="btn filter-button" data-type="Category" data-value="Bollywood">Bollywood</button>
-  <button class="btn filter-button" data-type="Category" data-value="Hollywood">Hollywood</button>
-    </div>
-  </header>
-    <nav class="menu-bar">
-
-   <button class="menu-item filter-button" data-type="Genre" data-value="Action"><i class="fas fa-link"></i> Genre</button>
-  <button class="menu-item filter-button" data-type="Year" data-value="2024"><i class="fas fa-calendar-alt"></i> Year</button>
-
-  <div class="menu-item"><i class="fas fa-globe"></i> Web Series</div>
-</nav>
-
-<!-- 🔽 Filter Buttons -->
-<section class="filter-buttons">
-  <button class="telegram-btn">
-    <i class="fab fa-telegram-plane"></i> JOIN TELEGRAM
+       
+    <link rel="shortcut icon" href="Capture.PNG" type="image/x-icon" />
+       
+    <!-- Free Font Awesome CDN -->
+       
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+     
+    <header class="navbar">
+         
+      <div class="logo-search">
+             
+        <a href="index.html"
+          ><div class="logo">MOVIES<span class="glow">VERSE</span></div></a
+        >
+             
+       <div class="search-box">
+  <input type="text" id="searchInput" placeholder="Search movies..." autocomplete="off" />
+  <button onclick="filterMovies()" title="Search" aria-label="Search">
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <span class="visually-hidden">Search</span>
   </button>
+  <ul id="suggestions" class="suggestions-list" role="listbox" aria-label="Search suggestions"></ul>
+</div>
 
+           
+      </div>
 
-  <button class="filter-btn">Web Series</button>
+         
+      <div class="top-buttons">
+             
+        <button
+          class="btn filter-button"
+          data-type="Category"
+          data-value="Bollywood"
+        >
+          Bollywood
+        </button>
+             
+        <button
+          class="btn filter-button"
+          data-type="Category"
+          data-value="Hollywood"
+        >
+          Hollywood
+        </button>
 
-</section>
+             
+        <!-- Category Dropdown -->
+             
+      
 
-      <section class="cards" id="movieContainer">
-  <!-- Movies will be loaded here -->
-</section>
-<div id="pagination" class="pagination-nav"></div>
+             
+        <!-- Genre Dropdown -->
+             
+       
+           
+      </div>
 
+         
+    
+       
+    </header>
 
-      <footer class="site-footer">
-        <div class="footer-links">
-          <a href="#">About Us</a>
-          <a href="#">Report Broken Links</a>
-          <a href="#">Request Us</a>
-          <a href="#">DMCA</a>
-          <a href="#">Contact Us</a>
-          <a href="#">Site Disclaimer</a>
+     
+    <nav class="menu-bar">
+    <div class="dropdown">
+        <button class="dropbtn">Category <i class="fas fa-chevron-down"></i></button>
+        <div class="dropdown-content">
+          <button class="filter-button" data-type="Category" data-value="South Indian">South Indian</button>
+          <button class="filter-button" data-type="Category" data-value="Hollywood">Hollywood</button>
+          <button class="filter-button" data-type="Category" data-value="Web Series">Web Series</button>
+          <button class="filter-button" data-type="Category" data-value="Bollywood">Bollywood</button>
+          <!-- Add more categories if needed -->
         </div>
-        <p>&copy; 2025 Movies Verse. All rights reserved
+      </div>
+      <div class="dropdown">
+  <button class="dropbtn">Year <i class="fas fa-chevron-down"></i></button>
+  <div class="dropdown-content">
+    <button class="filter-button" data-type="Year" data-value="2025">2025</button>
+    <button class="filter-button" data-type="Year" data-value="2024">2024</button>
+    <button class="filter-button" data-type="Year" data-value="2023">2023</button>
+    <button class="filter-button" data-type="Year" data-value="2022">2022</button>
+    <button class="filter-button" data-type="Year" data-value="2021">2021</button>
+    <button class="filter-button" data-type="Year" data-value="2020">2020</button>
+    <button class="filter-button" data-type="Year" data-value="2019">2019</button>
+    <button class="filter-button" data-type="Year" data-value="2018">2018</button>
+    <button class="filter-button" data-type="Year" data-value="2017">2017</button>
+    <button class="filter-button" data-type="Year" data-value="2016">2016</button>
+    <button class="filter-button" data-type="Year" data-value="2015">2015</button>
+    <button class="filter-button" data-type="Year" data-value="2014">2014</button>
+    <button class="filter-button" data-type="Year" data-value="2013">2013</button>
+    <button class="filter-button" data-type="Year" data-value="2012">2012</button>
+    <button class="filter-button" data-type="Year" data-value="2011">2011</button>
+    <button class="filter-button" data-type="Year" data-value="2010">2010</button>
+    <button class="filter-button" data-type="Year" data-value="2009">2009</button>
+    <button class="filter-button" data-type="Year" data-value="2008">2008</button>
+    <button class="filter-button" data-type="Year" data-value="2007">2007</button>
+    <button class="filter-button" data-type="Year" data-value="2006">2006</button>
+    <button class="filter-button" data-type="Year" data-value="2005">2005</button>
+    <button class="filter-button" data-type="Year" data-value="2004">2004</button>
+    <button class="filter-button" data-type="Year" data-value="2003">2003</button>
+    <button class="filter-button" data-type="Year" data-value="2002">2002</button>
+    <button class="filter-button" data-type="Year" data-value="2001">2001</button>
+    <button class="filter-button" data-type="Year" data-value="2000">2000</button>
+    <button class="filter-button" data-type="Year" data-value="1999">1999</button>
+    <button class="filter-button" data-type="Year" data-value="1998">1998</button>
+    <!-- Add more years as needed -->
+  </div>
+</div>
 
-          
-            // Get page from URL
-<script>
-const SHEET_URL = "https://opensheet.elk.sh/1JKDl8BP0YryYs5aOhVqV0K4zAhW0Qj3vhvo96Hx4lII/Original";
-const MOVIES_PER_PAGE = 30;
-let movieData = [];
+     <!-- Genre Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Genre <i class="fas fa-chevron-down"></i></button>
+        <div class="dropdown-content">
+          <button class="filter-button" data-type="Genre" data-value="Action">Action</button>
+          <button class="filter-button" data-type="Genre" data-value="Drama">Drama</button>
+          <button class="filter-button" data-type="Genre" data-value="Adventure">Adventure</button>
+          <button class="filter-button" data-type="Genre" data-value="Thriller">Thriller</button>
+          <button class="filter-button" data-type="Genre" data-value="Mystery">Mystery</button>
+          <button class="filter-button" data-type="Genre" data-value="Family">Family</button>
+          <button class="filter-button" data-type="Genre" data-value="Fantasy">Fantasy</button>
+          <button class="filter-button" data-type="Genre" data-value="Romance">Romance</button>
+          <!-- Add more genres if needed -->
+        </div>
+      </div>
+  </nav>
 
-const urlParams = new URLSearchParams(window.location.search);
-const currentPage = parseInt(urlParams.get("page")) || 1;
+     
+    <section class="filter-buttons">
+         
+      <button class="telegram-btn">
+              <i class="fab fa-telegram-plane"></i> JOIN TELEGRAM    
+      </button>
+     
+    </section>
 
-function renderMovies(movies, page = 1) {
+     
+    <section class="cards" id="movieContainer">
+         
+      <!-- Movies or shimmer placeholders will be loaded here -->
+       
+    </section>
+       
+    <div id="pagination" class="pagination-nav"></div>
+
+     
+    <footer class="site-footer">
+         
+      <div class="footer-links">
+              <a href="#">About Us</a>      
+        <a href="#">Report Broken Links</a>       <a href="#">Request Us</a>    
+          <a href="#">DMCA</a>       <a href="#">Contact Us</a>      
+        <a href="#">Site Disclaimer</a>    
+      </div>
+         
+      <p>&copy; 2025 Movies Verse. All rights reserved.</p>
+       
+    </footer>
+
+    <script>
+      const SHEET_URL =
+        "https://opensheet.elk.sh/1JKDl8BP0YryYs5aOhVqV0K4zAhW0Qj3vhvo96Hx4lII/Original";
+      const MOVIES_PER_PAGE = 30;
+      let movieData = [];
+      let currentFilteredMovies = [];
+      let currentPage =
+        parseInt(new URLSearchParams(window.location.search).get("page")) || 1;
+
+      const filterTitle = document.getElementById("filterTitle");
+
+      function showShimmerPlaceholders(count = MOVIES_PER_PAGE) {
+        const container = document.getElementById("movieContainer");
+        let placeholders = "";
+        for (let i = 0; i < count; i++) {
+          placeholders += `<div class="shimmer"></div>`;
+        }
+        container.innerHTML = placeholders;
+      }
+
+      function renderMovies(movies, page = 1) {
   const container = document.getElementById("movieContainer");
   const start = (page - 1) * MOVIES_PER_PAGE;
   const end = page * MOVIES_PER_PAGE;
   const moviesToShow = movies.slice(start, end);
 
-  container.innerHTML = moviesToShow.map((m, i) => `
+  if (moviesToShow.length === 0) {
+    container.innerHTML = '<p style="color:white; text-align:center; width:100%;">No movies found.</p>';
+    renderPagination(0);
+    return;
+  }
+
+  container.innerHTML = moviesToShow
+    .map(
+      (m, i) => `
     <article class="card">
-      <img src="${m['Poster URL']}" alt="${m['Title']}">
-      <h2>${m['Title']}</h2>
-      <p>${m['Genre']} • ${m['Tags']} • ⭐ ${m['Rating']}</p>
-      <a href="download.html?i=${start + i}">Download</a>
+      <img loading="lazy" src="${m["Poster URL"]}" alt="${m["Title"]}">
+      <h2>${m["Title"]}</h2>
+      <p>${m["Genre"]} • ${m["Tags"]} • ⭐ ${m["Rating"]}</p>
+      <a class="download-btn" href="download.html?i=${start + i}" aria-label="Download ${m["Title"]}">Download</a>
     </article>
-  `).join("");
+  `
+    )
+    .join("");
 
   renderPagination(movies.length);
 }
 
-function renderPagination(totalMovies) {
-  const pagination = document.getElementById("pagination");
-  const totalPages = Math.ceil(totalMovies / MOVIES_PER_PAGE);
-  let buttons = "";
 
-  for (let i = 1; i <= totalPages; i++) {
-    if (i === 1) {
-      buttons += `<a href="index.html"><button class="page-btn">${i}</button></a>`;
-    } else {
-      buttons += `<a href="post.html?page=${i}"><button class="page-btn">${i}</button></a>`;
-    }
+      function renderPagination(totalMovies) {
+        const pagination = document.getElementById("pagination");
+        const totalPages = Math.ceil(totalMovies / MOVIES_PER_PAGE);
+        let buttons = "";
+
+        for (let i = 1; i <= totalPages; i++) {
+          if (i === 1) {
+            buttons += `<a href="index.html"><button class="page-btn">${i}</button></a>`;
+          } else {
+            buttons += `<a href="post.html?page=${i}"><button class="page-btn">${i}</button></a>`;
+          }
+        }
+
+        pagination.innerHTML = buttons;
+      }
+
+      function goToPage(page) {
+        currentPage = page;
+        renderMovies(
+          currentFilteredMovies.length ? currentFilteredMovies : movieData,
+          currentPage
+        );
+      }
+
+      async function loadMovies() {
+        showShimmerPlaceholders();
+        const res = await fetch(SHEET_URL);
+        movieData = await res.json();
+        currentFilteredMovies = [...movieData];
+        renderMovies(movieData, currentPage);
+      }
+
+      // Search filter function with pagination reset and title update
+      function filterMovies() {
+        const query = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        currentPage = 1;
+        const filtered = movieData.filter(
+          (m) =>
+            m["Title"].toLowerCase().includes(query) ||
+            m["Genre"].toLowerCase().includes(query) ||
+            m["Tags"].toLowerCase().includes(query)
+        );
+        currentFilteredMovies = filtered;
+        renderMovies(filtered, currentPage);
+        filterTitle.textContent =
+          query.length > 0 ? `Search Results for "${query}"` : "All Movies";
+      }
+
+      // Filter function with pagination reset and title update
+      function applyFilter(type, value) {
+        currentPage = 1;
+        const filtered = movieData.filter(
+          (movie) =>
+            movie[type] &&
+            movie[type].toLowerCase().includes(value.toLowerCase())
+        );
+        currentFilteredMovies = filtered;
+        renderMovies(filtered, currentPage);
+
+        if (
+          type === "Category" &&
+          (value.toLowerCase() === "bollywood" ||
+            value.toLowerCase() === "hollywood")
+        ) {
+          filterTitle.textContent = `${value} Movies`;
+        } else if (type === "Genre" || type === "Category") {
+          filterTitle.textContent = `${value} Movies`;
+        } else {
+          filterTitle.textContent = "All Movies";
+        }
+      }
+
+      // Event delegation for filter buttons
+      document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("filter-button")) {
+          const type = e.target.getAttribute("data-type");
+          const value = e.target.getAttribute("data-value");
+          applyFilter(type, value);
+        }
+      });
+
+      // Support pressing Enter in search input to trigger search
+      document
+        .getElementById("searchInput")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            filterMovies();
+          }
+        });
+
+      loadMovies();
+    </script>
+
+    <script
+      src="https://libtl.com/sdk.js"
+      data-zone="9616697"
+      data-sdk="show_9616697"
+    ></script>
+
+    <script>
+      const searchInput = document.getElementById('searchInput');
+const suggestions = document.getElementById('suggestions');
+
+// Listen to input in search box to show suggestions
+searchInput.addEventListener('input', function () {
+  const query = this.value.toLowerCase().trim();
+
+  // Clear previous suggestions if empty query
+  if (!query) {
+    suggestions.innerHTML = '';
+    suggestions.style.display = 'none';
+    return;
   }
 
-  pagination.innerHTML = buttons;
-}
+  // Find up to 10 movie titles that match beginning of input
+  const matched = movieData
+    .filter(movie => movie.Title.toLowerCase().startsWith(query))
+    .slice(0, 10);
 
-async function loadMovies() {
-  const res = await fetch(SHEET_URL);
-  movieData = await res.json();
-  renderMovies(movieData, currentPage);
-}
+  if (matched.length === 0) {
+    suggestions.innerHTML = '<li>No suggestions found</li>';
+    suggestions.style.display = 'block';
+    return;
+  }
 
-loadMovies();
-    
-function applyFilter(type, value) {
-  const filtered = movieData.filter(movie =>
-    movie[type] && movie[type].toLowerCase().includes(value.toLowerCase())
-  );
-  renderMovies(filtered);
-}
+  // Render suggestions list items, each with movie title
+  suggestions.innerHTML = matched
+    .map(
+      movie =>
+        `<li role="option" tabindex="0" data-title="${movie.Title}">${movie.Title}</li>`
+    )
+    .join('');
+  suggestions.style.display = 'block';
+});
 
-// Add event listener to all filter buttons
-document.addEventListener("click", function (e) {
-  if (e.target.classList.contains("filter-button")) {
-    const type = e.target.getAttribute("data-type");
-    const value = e.target.getAttribute("data-value");
-    applyFilter(type, value);
+// Clicking a suggestion
+suggestions.addEventListener('click', function (e) {
+  if (e.target && e.target.tagName === 'LI' && e.target.dataset.title) {
+    searchInput.value = e.target.dataset.title;
+    suggestions.innerHTML = '';
+    suggestions.style.display = 'none';
+    filterMovies();
   }
 });
 
+// Optionally, handle keyboard navigation (up/down/enter) for suggestions
+let selectedIndex = -1;
+searchInput.addEventListener('keydown', function (e) {
+  const items = suggestions.querySelectorAll('li');
+  if (!items.length) return;
 
-</script>
- <script src='https://libtl.com/sdk.js' data-zone='9616697' data-sdk='show_9616697'></script>
- 
-</body>
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    selectedIndex = (selectedIndex + 1) % items.length;
+    updateAriaSelected(items);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+    updateAriaSelected(items);
+  } else if (e.key === 'Enter') {
+    if(selectedIndex >= 0 && items[selectedIndex]) {
+      e.preventDefault();
+      searchInput.value = items[selectedIndex].dataset.title;
+      suggestions.innerHTML = '';
+      suggestions.style.display = 'none';
+      filterMovies();
+      selectedIndex = -1;
+    }
+  }
+});
+
+function updateAriaSelected(items) {
+  items.forEach((item, idx) => {
+    if (idx === selectedIndex) {
+      item.setAttribute('aria-selected', 'true');
+      item.focus();
+    } else {
+      item.removeAttribute('aria-selected');
+    }
+  });
+}
+
+// Hide suggestions if clicking outside
+document.addEventListener('click', function(e) {
+  if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+    suggestions.innerHTML = '';
+    suggestions.style.display = 'none';
+    selectedIndex = -1;
+  }
+});
+
+    </script>
+  </body>
 </html>

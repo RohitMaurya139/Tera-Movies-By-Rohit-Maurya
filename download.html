@@ -9,16 +9,39 @@
   </head>
   <body>
     <header class="navbar">
-      <div class="logo-search">
-        <a href="index.html"
-          ><div class="logo">TERA<span class="glow">MOVIES</span></div></a
-        >
-      </div>
-      <div class="top-buttons">
-        <button class="btn" id="redbtn">Bollywood</button>
-        <button class="btn" id="greenbtn">Hollywood</button>
-      </div>
-    </header>
+    <div class="logo-search">
+      <a href="index.html"
+        ><div class="logo">TERA<span class="glow">MOVIES</span></div></a
+      >
+     <div class="search-box">
+  <input type="text" id="searchInput" placeholder="Search movies..." autocomplete="off" />
+  <button onclick="filterMovies()" title="Search" aria-label="Search">
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <span class="visually-hidden">Search</span>
+  </button>
+  <ul id="suggestions" class="suggestions-list" role="listbox" aria-label="Search suggestions"></ul>
+</div>
+
+    </div>
+    <div class="top-buttons">
+      <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="Bollywood"
+      >
+        Bollywood
+      </button>
+      <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="Hollywood"
+      >
+        Hollywood
+      </button>
+
+      <!-- Category Dropdown -->
+     
+  </header>
 
     <section class="downloadSection">
       <h1>Movie Download Section</h1>
@@ -86,5 +109,98 @@
       data-zone="9616697"
       data-sdk="show_9616697"
     ></script>
+    <script>
+      const searchInput = document.getElementById('searchInput');
+const suggestions = document.getElementById('suggestions');
+
+// Listen to input in search box to show suggestions
+searchInput.addEventListener('input', function () {
+  const query = this.value.toLowerCase().trim();
+
+  // Clear previous suggestions if empty query
+  if (!query) {
+    suggestions.innerHTML = '';
+    suggestions.style.display = 'none';
+    return;
+  }
+
+  // Find up to 10 movie titles that match beginning of input
+  const matched = movieData
+    .filter(movie => movie.Title.toLowerCase().startsWith(query))
+    .slice(0, 10);
+
+  if (matched.length === 0) {
+    suggestions.innerHTML = '<li>No suggestions found</li>';
+    suggestions.style.display = 'block';
+    return;
+  }
+
+  // Render suggestions list items, each with movie title
+  suggestions.innerHTML = matched
+    .map(
+      movie =>
+        `<li role="option" tabindex="0" data-title="${movie.Title}">${movie.Title}</li>`
+    )
+    .join('');
+  suggestions.style.display = 'block';
+});
+
+// Clicking a suggestion
+suggestions.addEventListener('click', function (e) {
+  if (e.target && e.target.tagName === 'LI' && e.target.dataset.title) {
+    searchInput.value = e.target.dataset.title;
+    suggestions.innerHTML = '';
+    suggestions.style.display = 'none';
+    filterMovies();
+  }
+});
+
+// Optionally, handle keyboard navigation (up/down/enter) for suggestions
+let selectedIndex = -1;
+searchInput.addEventListener('keydown', function (e) {
+  const items = suggestions.querySelectorAll('li');
+  if (!items.length) return;
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    selectedIndex = (selectedIndex + 1) % items.length;
+    updateAriaSelected(items);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+    updateAriaSelected(items);
+  } else if (e.key === 'Enter') {
+    if(selectedIndex >= 0 && items[selectedIndex]) {
+      e.preventDefault();
+      searchInput.value = items[selectedIndex].dataset.title;
+      suggestions.innerHTML = '';
+      suggestions.style.display = 'none';
+      filterMovies();
+      selectedIndex = -1;
+    }
+  }
+});
+
+function updateAriaSelected(items) {
+  items.forEach((item, idx) => {
+    if (idx === selectedIndex) {
+      item.setAttribute('aria-selected', 'true');
+      item.focus();
+    } else {
+      item.removeAttribute('aria-selected');
+    }
+  });
+}
+
+// Hide suggestions if clicking outside
+document.addEventListener('click', function(e) {
+  if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+    suggestions.innerHTML = '';
+    suggestions.style.display = 'none';
+    selectedIndex = -1;
+  }
+});
+
+    </script>
   </body>
 </html>
