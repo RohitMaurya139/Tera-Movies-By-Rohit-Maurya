@@ -68,11 +68,16 @@
       <div class="movie-card">
         <div class="main-poster">
           <!-- Movie poster image -->
-          <img src="" alt="Movie Poster" class="main-movie-img" />
-        </div>
-
+          <img src="" alt="Movie Poster" class="main-movie-img" />        </div>
         <!-- Movie title -->
         <h2 class="movie-title">Loading...</h2>
+         <!-- video Player implemented here -->
+         <div class="video-player">
+           <video controls>
+             <source src="" type="video/mp4" />
+             Your browser does not support the video tag.
+           </video>
+         </div>
 
         <!-- Download links will be dynamically injected here -->
         <div class="download-links"></div>
@@ -105,29 +110,32 @@
         "https://opensheet.elk.sh/1JKDl8BP0YryYs5aOhVqV0K4zAhW0Qj3vhvo96Hx4lII/Original";
 
       // Load movie details based on the index parameter "i" in the URL query string
-      async function loadMovieDetails() {
-        const index = new URLSearchParams(window.location.search).get("i");
-        const res = await fetch(SHEET_URL);
-        const data = await res.json();
-        const movie = data[parseInt(index)];
+   async function loadMovieDetails() {
+  const index = new URLSearchParams(window.location.search).get("i");
+  const res = await fetch(SHEET_URL);
+  const data = await res.json();
+  const movie = data[parseInt(index)];
 
-        if (!movie) return; // If no movie found for index, exit function
+  if (!movie) return;
 
-        // Populate the movie poster image
-        document.querySelector(".main-movie-img").src = movie["Poster URL"];
-        // Display the movie title
-        document.querySelector(".movie-title").textContent = movie["Title"];
-        // Display the storyline/description
-        document.querySelector(".movie-description").textContent =
-          movie["Storyline"];
+  document.querySelector(".main-movie-img").src = movie["Poster URL"];
+  document.querySelector(".movie-title").textContent = movie["Title"];
+  document.querySelector(".movie-description").textContent = movie["Storyline"];
 
-        // Generate and insert download buttons with links
-        document.querySelector(".download-links").innerHTML = `
-          <a href="${movie["Download 480p"]}" class="btn">Download 480p</a>
-          <a href="${movie["Download 720p"]}" class="btn">Download 720p</a>
-          <a href="${movie["Download 1080p"]}" class="btn">Download 1080p</a>
-        `;
-      }
+  // Insert download links
+  document.querySelector(".download-links").innerHTML = `
+    <a href="${movie["Download 480p"]}" class="btn">Download 480p</a>
+    <a href="${movie["Download 720p"]}" class="btn">Download 720p</a>
+    <a href="${movie["Download 1080p"]}" class="btn">Download 1080p</a>
+  `;
+
+  // Set video source for online playback (choose appropriate URL)
+  const videoSource = movie["Download 720p"] || movie["Download 480p"] || movie["Download 1080p"];
+  const videoElement = document.querySelector(".video-player video source");
+  videoElement.src = videoSource;  // set video src dynamically
+  videoElement.parentElement.load();  // reload video player with new source
+}
+
 
       // Execute loading of movie details on page load
       loadMovieDetails();
