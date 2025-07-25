@@ -10,9 +10,7 @@
   <body>
     <header class="navbar">
     <div class="logo-search">
-      <a href="index.html"
-        ><div class="logo">TERA<span class="glow">MOVIES</span></div></a
-      >
+        <a href="index.html"><img class="logo" src="images/img.png" alt="logo"></a>
      <div class="search-box">
   <input type="text" id="searchInput" placeholder="Search movies..." autocomplete="off" />
   <button onclick="filterMovies()" title="Search" aria-label="Search">
@@ -31,6 +29,20 @@
       >
         Bollywood
       </button>
+       <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="South Indian"
+      >
+        South Movies
+      </button>
+       <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="Web Series"
+      >
+        WebSeries
+      </button>
       <button
         class="btn filter-button"
         data-type="Category"
@@ -39,6 +51,7 @@
         Hollywood
       </button>
 
+     </div>
       <!-- Category Dropdown -->
      
   </header>

@@ -22,10 +22,8 @@
          
       <div class="logo-search">
              
-        <a href="index.html"
-          ><div class="logo">MOVIES<span class="glow">VERSE</span></div></a
-        >
-             
+        <a href="index.html"><img class="logo" src="images/img.png" alt="logo"></a>
+        
        <div class="search-box">
   <input type="text" id="searchInput" placeholder="Search movies..." autocomplete="off" />
   <button onclick="filterMovies()" title="Search" aria-label="Search">
@@ -35,57 +33,47 @@
   <ul id="suggestions" class="suggestions-list" role="listbox" aria-label="Search suggestions"></ul>
 </div>
 
-           
-      </div>
-
-         
-      <div class="top-buttons">
-             
-        <button
-          class="btn filter-button"
-          data-type="Category"
-          data-value="Bollywood"
-        >
-          Bollywood
-        </button>
-             
-        <button
-          class="btn filter-button"
-          data-type="Category"
-          data-value="Hollywood"
-        >
-          Hollywood
-        </button>
-
-             
-        <!-- Category Dropdown -->
-             
       
-
-             
-        <!-- Genre Dropdown -->
-             
-       
-           
       </div>
 
          
-    
-       
+     <div class="top-buttons">
+      <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="Bollywood"
+      >
+        Bollywood
+      </button>
+       <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="South Indian"
+      >
+        South Movies
+      </button>
+       <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="Web Series"
+      >
+        WebSeries
+      </button>
+      <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="Hollywood"
+      >
+        Hollywood
+      </button>
+
+  
+      </div>
+
     </header>
 
-     
     <nav class="menu-bar">
-    <div class="dropdown">
-        <button class="dropbtn">Category <i class="fas fa-chevron-down"></i></button>
-        <div class="dropdown-content">
-          <button class="filter-button" data-type="Category" data-value="South Indian">South Indian</button>
-          <button class="filter-button" data-type="Category" data-value="Hollywood">Hollywood</button>
-          <button class="filter-button" data-type="Category" data-value="Web Series">Web Series</button>
-          <button class="filter-button" data-type="Category" data-value="Bollywood">Bollywood</button>
-          <!-- Add more categories if needed -->
-        </div>
-      </div>
+   
       <div class="dropdown">
   <button class="dropbtn">Year <i class="fas fa-chevron-down"></i></button>
   <div class="dropdown-content">
@@ -138,36 +126,38 @@
       </div>
   </nav>
 
-     
+    
     <section class="filter-buttons">
-         
+      
       <button class="telegram-btn">
-              <i class="fab fa-telegram-plane"></i> JOIN TELEGRAM    
+        <i class="fab fa-telegram-plane"></i> JOIN TELEGRAM 
       </button>
      
     </section>
 
-     
+    
     <section class="cards" id="movieContainer">
-         
+      
       <!-- Movies or shimmer placeholders will be loaded here -->
-       
+      
     </section>
-       
+    
     <div id="pagination" class="pagination-nav"></div>
 
-     
+    
     <footer class="site-footer">
-         
+      
       <div class="footer-links">
-              <a href="#">About Us</a>      
-        <a href="#">Report Broken Links</a>       <a href="#">Request Us</a>    
-          <a href="#">DMCA</a>       <a href="#">Contact Us</a>      
-        <a href="#">Site Disclaimer</a>    
+         <a href="#">About Us</a>
+        <a href="#">Report Broken Links</a>
+        <a href="#">Request Us</a>
+        <a href="#">DMCA</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Site Disclaimer</a>
       </div>
-         
+      
       <p>&copy; 2025 Movies Verse. All rights reserved.</p>
-       
+      
     </footer>
 
     <script>
@@ -189,8 +179,7 @@
         }
         container.innerHTML = placeholders;
       }
-
-      function renderMovies(movies, page = 1) {
+ function renderMovies(movies, page = 1) {
   const container = document.getElementById("movieContainer");
   const start = (page - 1) * MOVIES_PER_PAGE;
   const end = page * MOVIES_PER_PAGE;
@@ -205,13 +194,15 @@
   container.innerHTML = moviesToShow
     .map(
       (m, i) => `
-    <article class="card">
-      <img loading="lazy" src="${m["Poster URL"]}" alt="${m["Title"]}">
-      <h2>${m["Title"]}</h2>
-      <p>${m["Genre"]} • ${m["Tags"]} • ⭐ ${m["Rating"]}</p>
-      <a class="download-btn" href="download.html?i=${start + i}" aria-label="Download ${m["Title"]}">Download</a>
-    </article>
-  `
+      <a href="download.html?i=${start + i}" class="card-link" aria-label="Download ${m["Title"]}">
+        <article class="card">
+          <img loading="lazy" src="${m["Poster URL"]}" alt="${m["Title"]}">
+          <h2>${m["Title"]}</h2>
+          <p>${m["Genre"]} • ${m["Tags"]} • ⭐ ${m["Rating"]}</p>
+          <span class="download-btn">Download</span>
+        </article>
+      </a>
+    `
     )
     .join("");
 

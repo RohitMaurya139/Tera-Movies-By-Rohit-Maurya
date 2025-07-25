@@ -13,10 +13,7 @@
   </head>
   <body>
   <header class="navbar">
-    <div class="logo-search">
-      <a href="index.html"
-        ><div class="logo">TERA<span class="glow">MOVIES</span></div></a
-      >
+    <div class="logo-search">        <a href="index.html"><img class="logo" src="images/img.png" alt="logo"></a>
      <div class="search-box">
   <input type="text" id="searchInput" placeholder="Search movies..." autocomplete="off" />
   <button onclick="filterMovies()" title="Search" aria-label="Search">
@@ -35,6 +32,20 @@
       >
         Bollywood
       </button>
+       <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="South Indian"
+      >
+        South Movies 
+      </button>
+       <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="Web Series"
+      >
+        WebSeries
+      </button>
       <button
         class="btn filter-button"
         data-type="Category"
@@ -50,20 +61,10 @@
   <!-- 🔽 Menu Navigation -->
   <nav class="menu-bar">
     <div class="dropdown">
-        <button class="dropbtn">Category <i class="fas fa-chevron-down"></i></button>
-        <div class="dropdown-content">
-          <button class="filter-button" data-type="Category" data-value="South Indian">South Indian</button>
-          <button class="filter-button" data-type="Category" data-value="Hollywood">Hollywood</button>
-          <button class="filter-button" data-type="Category" data-value="Web Series">Web Series</button>
-          <button class="filter-button" data-type="Category" data-value="Bollywood">Bollywood</button>
-          <!-- Add more categories if needed -->
-        </div>
-      </div>
-      <div class="dropdown">
-  <button class="dropbtn">Year <i class="fas fa-chevron-down"></i></button>
-  <div class="dropdown-content">
-    <button class="filter-button" data-type="Year" data-value="2025">2025</button>
-    <button class="filter-button" data-type="Year" data-value="2024">2024</button>
+      <button class="dropbtn">Year <i class="fas fa-chevron-down"></i></button>
+      <div class="dropdown-content">
+        <button class="filter-button" data-type="Year" data-value="2025">2025</button>
+        <button class="filter-button" data-type="Year" data-value="2024">2024</button>
     <button class="filter-button" data-type="Year" data-value="2023">2023</button>
     <button class="filter-button" data-type="Year" data-value="2022">2022</button>
     <button class="filter-button" data-type="Year" data-value="2021">2021</button>
@@ -139,9 +140,10 @@
       </div>
       <p>&copy; 2025 TeraMovies. All rights reserved.</p>
     </div>
-  </footer>
+    </footer>
 
-  <script>
+
+     <script>
     Telegram.WebApp.ready();
     Telegram.WebApp.expand();
 
@@ -164,7 +166,7 @@
       container.innerHTML = placeholders;
     }
 
-    function renderMovies(movies, page = 1) {
+   function renderMovies(movies, page = 1) {
   const container = document.getElementById("movieContainer");
   const start = (page - 1) * MOVIES_PER_PAGE;
   const end = page * MOVIES_PER_PAGE;
@@ -179,13 +181,15 @@
   container.innerHTML = moviesToShow
     .map(
       (m, i) => `
-    <article class="card">
-      <img loading="lazy" src="${m["Poster URL"]}" alt="${m["Title"]}">
-      <h2>${m["Title"]}</h2>
-      <p>${m["Genre"]} • ${m["Tags"]} • ⭐ ${m["Rating"]}</p>
-      <a class="download-btn" href="download.html?i=${start + i}" aria-label="Download ${m["Title"]}">Download</a>
-    </article>
-  `
+      <a href="download.html?i=${start + i}" class="card-link" aria-label="Download ${m["Title"]}">
+        <article class="card">
+          <img loading="lazy" src="${m["Poster URL"]}" alt="${m["Title"]}">
+          <h2>${m["Title"]}</h2>
+          <p>${m["Genre"]} • ${m["Tags"]} • ⭐ ${m["Rating"]}</p>
+          <span class="download-btn">Download</span>
+        </article>
+      </a>
+    `
     )
     .join("");
 
@@ -268,9 +272,7 @@
   <script
     src="https://libtl.com/sdk.js"
     data-zone="9616697"
-    data-sdk="show_9616697"
-  ></script>
-
+    data-sdk="show_9616697"  ></script>
 
   <script>
     const searchInput = document.getElementById('searchInput');
