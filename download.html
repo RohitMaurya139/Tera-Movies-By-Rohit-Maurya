@@ -5,73 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TeraMovies | Download</title>
     <link rel="stylesheet" href="style.css" />
+    <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
   <body>
     <header class="navbar">
-    <div class="logo-search">
-        <a href="index.html"><img class="logo" src="images/img.png" alt="logo"></a>
-     <div class="search-box">
-  <input type="text" id="searchInput" placeholder="Search movies..." autocomplete="off" />
-  <button onclick="filterMovies()" title="Search" aria-label="Search">
-    <i class="fas fa-search" aria-hidden="true"></i>
-    <span class="visually-hidden">Search</span>
-  </button>
-  <ul id="suggestions" class="suggestions-list" role="listbox" aria-label="Search suggestions"></ul>
-</div>
+      <div class="logo-search">
+        <!-- Logo linked to homepage -->
+        <a href="index.html"><img class="logo" src="images/img.png" alt="logo" /></a>
+        <div class="search-box">
+          <!-- Search input box -->
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search movies..."
+            autocomplete="off"
+          />
+          <!-- Search button with icon -->
+          <button onclick="filterMovies()" title="Search" aria-label="Search">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="visually-hidden">Search</span>
+          </button>
+          <!-- Suggestions list for autocomplete -->
+          <ul
+            id="suggestions"
+            class="suggestions-list"
+            role="listbox"
+            aria-label="Search suggestions"
+          ></ul>
+        </div>
+      </div>
 
-    </div>
-    <div class="top-buttons">
-      <button
-        class="btn filter-button"
-        data-type="Category"
-        data-value="Bollywood"
-      >
-        Bollywood
-      </button>
-       <button
-        class="btn filter-button"
-        data-type="Category"
-        data-value="South Indian"
-      >
-        South Movies
-      </button>
-       <button
-        class="btn filter-button"
-        data-type="Category"
-        data-value="Web Series"
-      >
-        WebSeries
-      </button>
-      <button
-        class="btn filter-button"
-        data-type="Category"
-        data-value="Hollywood"
-      >
-        Hollywood
-      </button>
+      <div class="top-buttons">
+        <!-- Filter buttons for movie categories -->
+        <button class="btn filter-button" data-type="Category" data-value="Bollywood">
+          Bollywood
+        </button>
+        <button
+          class="btn filter-button"
+          data-type="Category"
+          data-value="South Indian"
+        >
+          South Movies
+        </button>
+        <button class="btn filter-button" data-type="Category" data-value="Web Series">
+          WebSeries
+        </button>
+        <button class="btn filter-button" data-type="Category" data-value="Hollywood">
+          Hollywood
+        </button>
+      </div>
+      <!-- Placeholder for Category Dropdown if needed in future -->
+    </header>
 
-     </div>
-      <!-- Category Dropdown -->
-     
-  </header>
-
+    <!-- Section Title -->
     <section class="downloadSection">
       <h1>Movie Download Section</h1>
     </section>
 
+    <!-- Movie Details Section -->
     <section class="movies">
       <div class="movie-card">
         <div class="main-poster">
+          <!-- Movie poster image -->
           <img src="" alt="Movie Poster" class="main-movie-img" />
         </div>
 
+        <!-- Movie title -->
         <h2 class="movie-title">Loading...</h2>
 
-        <div class="download-links">
-          <!-- Buttons will be added here -->
-        </div>
+        <!-- Download links will be dynamically injected here -->
+        <div class="download-links"></div>
 
+        <!-- Movie description section -->
         <div class="description">
           <h2>Description</h2>
           <p class="movie-description">Loading movie details...</p>
@@ -79,6 +85,7 @@
       </div>
     </section>
 
+    <!-- Footer -->
     <footer class="site-footer">
       <div class="footer-links">
         <a href="#">About</a>
@@ -89,131 +96,152 @@
     </footer>
 
     <script>
+      // Initialize Telegram Web App features
       Telegram.WebApp.ready();
       Telegram.WebApp.expand();
 
+      // URL to the Google Sheets data published as JSON via opensheet.elk.sh
       const SHEET_URL =
         "https://opensheet.elk.sh/1JKDl8BP0YryYs5aOhVqV0K4zAhW0Qj3vhvo96Hx4lII/Original";
 
+      // Load movie details based on the index parameter "i" in the URL query string
       async function loadMovieDetails() {
         const index = new URLSearchParams(window.location.search).get("i");
         const res = await fetch(SHEET_URL);
         const data = await res.json();
         const movie = data[parseInt(index)];
 
-        if (!movie) return;
+        if (!movie) return; // If no movie found for index, exit function
 
+        // Populate the movie poster image
         document.querySelector(".main-movie-img").src = movie["Poster URL"];
+        // Display the movie title
         document.querySelector(".movie-title").textContent = movie["Title"];
+        // Display the storyline/description
         document.querySelector(".movie-description").textContent =
           movie["Storyline"];
 
+        // Generate and insert download buttons with links
         document.querySelector(".download-links").innerHTML = `
-        <a href="${movie["Download 480p"]}" class="btn">Download 480p</a>
-        <a href="${movie["Download 720p"]}" class="btn">Download 720p</a>
-        <a href="${movie["Download 1080p"]}" class="btn">Download 1080p</a>
-      `;
+          <a href="${movie["Download 480p"]}" class="btn">Download 480p</a>
+          <a href="${movie["Download 720p"]}" class="btn">Download 720p</a>
+          <a href="${movie["Download 1080p"]}" class="btn">Download 1080p</a>
+        `;
       }
 
+      // Execute loading of movie details on page load
       loadMovieDetails();
     </script>
+
+    <!-- SDK script for ads or other services -->
     <script
       src="https://libtl.com/sdk.js"
       data-zone="9616697"
       data-sdk="show_9616697"
     ></script>
+
     <script>
-      const searchInput = document.getElementById('searchInput');
-const suggestions = document.getElementById('suggestions');
+      const searchInput = document.getElementById("searchInput");
+      const suggestions = document.getElementById("suggestions");
 
-// Listen to input in search box to show suggestions
-searchInput.addEventListener('input', function () {
-  const query = this.value.toLowerCase().trim();
+      // Listen to input in search box to show suggestions
+      searchInput.addEventListener("input", function () {
+        const query = this.value.toLowerCase().trim();
 
-  // Clear previous suggestions if empty query
-  if (!query) {
-    suggestions.innerHTML = '';
-    suggestions.style.display = 'none';
-    return;
-  }
+        // Clear previous suggestions if input is empty
+        if (!query) {
+          suggestions.innerHTML = "";
+          suggestions.style.display = "none";
+          return;
+        }
 
-  // Find up to 10 movie titles that match beginning of input
-  const matched = movieData
-    .filter(movie => movie.Title.toLowerCase().startsWith(query))
-    .slice(0, 10);
+        // Filter movie data to find titles that start with the query (max 10)
+        const matched = movieData
+          .filter((movie) => movie.Title.toLowerCase().startsWith(query))
+          .slice(0, 10);
 
-  if (matched.length === 0) {
-    suggestions.innerHTML = '<li>No suggestions found</li>';
-    suggestions.style.display = 'block';
-    return;
-  }
+        if (matched.length === 0) {
+          // Show no suggestions message
+          suggestions.innerHTML = "<li>No suggestions found</li>";
+          suggestions.style.display = "block";
+          return;
+        }
 
-  // Render suggestions list items, each with movie title
-  suggestions.innerHTML = matched
-    .map(
-      movie =>
-        `<li role="option" tabindex="0" data-title="${movie.Title}">${movie.Title}</li>`
-    )
-    .join('');
-  suggestions.style.display = 'block';
-});
+        // Create suggestion list items with proper roles and data attribute
+        suggestions.innerHTML = matched
+          .map(
+            (movie) =>
+              `<li role="option" tabindex="0" data-title="${movie.Title}">${movie.Title}</li>`
+          )
+          .join("");
+        suggestions.style.display = "block";
+      });
 
-// Clicking a suggestion
-suggestions.addEventListener('click', function (e) {
-  if (e.target && e.target.tagName === 'LI' && e.target.dataset.title) {
-    searchInput.value = e.target.dataset.title;
-    suggestions.innerHTML = '';
-    suggestions.style.display = 'none';
-    filterMovies();
-  }
-});
+      // Handle clicking on a suggestion from the list
+      suggestions.addEventListener("click", function (e) {
+        if (e.target && e.target.tagName === "LI" && e.target.dataset.title) {
+          // Set input to selected movie title
+          searchInput.value = e.target.dataset.title;
+          // Hide suggestions
+          suggestions.innerHTML = "";
+          suggestions.style.display = "none";
+          // Trigger filtering of movies based on selection
+          filterMovies();
+        }
+      });
 
-// Optionally, handle keyboard navigation (up/down/enter) for suggestions
-let selectedIndex = -1;
-searchInput.addEventListener('keydown', function (e) {
-  const items = suggestions.querySelectorAll('li');
-  if (!items.length) return;
+      // Handle keyboard navigation (arrow up/down and enter) for suggestions
+      let selectedIndex = -1;
+      searchInput.addEventListener("keydown", function (e) {
+        const items = suggestions.querySelectorAll("li");
+        if (!items.length) return;
 
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    selectedIndex = (selectedIndex + 1) % items.length;
-    updateAriaSelected(items);
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    selectedIndex = (selectedIndex - 1 + items.length) % items.length;
-    updateAriaSelected(items);
-  } else if (e.key === 'Enter') {
-    if(selectedIndex >= 0 && items[selectedIndex]) {
-      e.preventDefault();
-      searchInput.value = items[selectedIndex].dataset.title;
-      suggestions.innerHTML = '';
-      suggestions.style.display = 'none';
-      filterMovies();
-      selectedIndex = -1;
-    }
-  }
-});
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          selectedIndex = (selectedIndex + 1) % items.length;
+          updateAriaSelected(items);
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+          updateAriaSelected(items);
+        } else if (e.key === "Enter") {
+          if (selectedIndex >= 0 && items[selectedIndex]) {
+            e.preventDefault();
+            // Set input value to the selected suggestion
+            searchInput.value = items[selectedIndex].dataset.title;
+            // Hide suggestions
+            suggestions.innerHTML = "";
+            suggestions.style.display = "none";
+            // Filter movies based on selected suggestion
+            filterMovies();
+            selectedIndex = -1;
+          }
+        }
+      });
 
-function updateAriaSelected(items) {
-  items.forEach((item, idx) => {
-    if (idx === selectedIndex) {
-      item.setAttribute('aria-selected', 'true');
-      item.focus();
-    } else {
-      item.removeAttribute('aria-selected');
-    }
-  });
-}
+      /**
+       * Highlights the currently selected suggestion and manages ARIA attributes
+       * @param {NodeListOf<Element>} items - List of suggestion list items
+       */
+      function updateAriaSelected(items) {
+        items.forEach((item, idx) => {
+          if (idx === selectedIndex) {
+            item.setAttribute("aria-selected", "true");
+            item.focus();
+          } else {
+            item.removeAttribute("aria-selected");
+          }
+        });
+      }
 
-// Hide suggestions if clicking outside
-document.addEventListener('click', function(e) {
-  if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
-    suggestions.innerHTML = '';
-    suggestions.style.display = 'none';
-    selectedIndex = -1;
-  }
-});
-
+      // Hide suggestions if clicking outside search input or suggestions list
+      document.addEventListener("click", function (e) {
+        if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+          suggestions.innerHTML = "";
+          suggestions.style.display = "none";
+          selectedIndex = -1;
+        }
+      });
     </script>
   </body>
 </html>

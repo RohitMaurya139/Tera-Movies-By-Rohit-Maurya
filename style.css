@@ -362,19 +362,29 @@ body {
 
 /* Pagination styles */
 .pagination-nav {
+  display: flex;
+  justify-content: center;  /* centers buttons horizontally */
+  align-items: center;      /* centers buttons vertically */
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-top: 1px solid #333;
+  max-width: 1200px;
+  margin: 2rem auto;         /* auto left/right margin centers the nav container */
+  flex-wrap: wrap;
+  gap: 10px;                 /* space between buttons */
   text-align: center;
-  margin: 2rem 0;
+  height: auto;
 }
 
 .page-btn {
-  margin: 0 5px;
-  padding: 8px 12px;
-  background-color: #1f1f1f;
+  background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 0;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  flex-shrink: 0;
 }
 
 .page-btn:hover {
