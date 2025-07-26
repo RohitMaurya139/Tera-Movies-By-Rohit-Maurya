@@ -128,9 +128,9 @@
 
     <!-- Section containing a Telegram join button -->
     <section class="filter-buttons">
-      <button class="telegram-btn">
+       <a href="https://t.me/teramoviesweb"><button class="telegram-btn">
         <i class="fab fa-telegram-plane"></i> JOIN TELEGRAM
-      </button>
+      </button> </a>
     </section>
 
     <!-- Container for dynamically loaded movie cards -->
@@ -191,7 +191,7 @@
        * @param {Array} movies List of movie objects to render
        * @param {number} page Page number to show (default is 1)
        */
-     function renderMovies(movies, page = 1) {
+   function renderMovies(movies, page = 1) {
   const container = document.getElementById("movieContainer");
   const start = (page - 1) * MOVIES_PER_PAGE;
   const end = page * MOVIES_PER_PAGE;
@@ -212,6 +212,8 @@
           <span class="tag">${m["Language"] || m["Category"] || "HINDI"}</span>
           <div class="card-body">
             <div class="title">${m["Title"]} ${m["Year"] ? `(${m["Year"]})` : ""}</div>
+            <div class="rating">${m["Rating"] || "N/A"} ⭐</div>
+<!-- Added rating here -->
             <div class="platform">${m["Platform"] || m["Category"] || "Hindi Dubbed"}</div>
           </div>
         </div>
@@ -221,6 +223,7 @@
 
   renderPagination(movies.length);
 }
+
 
 
       /**
