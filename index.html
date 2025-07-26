@@ -134,9 +134,10 @@
     </section>
 
     <!-- Container for dynamically loaded movie cards -->
-    <section class="cards" id="movieContainer">
-      <!-- Movie cards will be inserted here -->
-    </section>
+  <section class="movie-grid" id="movieContainer">
+  <!-- Movie cards will be inserted here -->
+</section>
+
 
     <!-- Pagination navigation container -->
     <div id="pagination" class="pagination-nav"></div>
@@ -190,38 +191,37 @@
        * @param {Array} movies List of movie objects to render
        * @param {number} page Page number to show (default is 1)
        */
-      function renderMovies(movies, page = 1) {
-        const container = document.getElementById("movieContainer");
-        const start = (page - 1) * MOVIES_PER_PAGE;
-        const end = page * MOVIES_PER_PAGE;
-        const moviesToShow = movies.slice(start, end);
+     function renderMovies(movies, page = 1) {
+  const container = document.getElementById("movieContainer");
+  const start = (page - 1) * MOVIES_PER_PAGE;
+  const end = page * MOVIES_PER_PAGE;
+  const moviesToShow = movies.slice(start, end);
 
-        // Show message if no movies found
-        if (moviesToShow.length === 0) {
-          container.innerHTML =
-            '<p style="color:white; text-align:center; width:100%;">No movies found.</p>';
-          renderPagination(0);
-          return;
-        }
+  if (moviesToShow.length === 0) {
+    container.innerHTML =
+      '<p style="color:white; text-align:center; width:100%;">No movies found.</p>';
+    renderPagination(0);
+    return;
+  }
 
-        // Render movie cards with link to the download page passing the movie index
-        container.innerHTML = moviesToShow
-          .map(
-            (m, i) => `
-          <a href="download.html?i=${start + i}" class="card-link" aria-label="Download ${m["Title"]}">
-            <article class="card">
-              <img loading="lazy" src="${m["Poster URL"]}" alt="${m["Title"]}" />
-              <h2>${m["Title"]}</h2>
-              <p>${m["Genre"]} • ${m["Tags"]} • ⭐ ${m["Rating"]}</p>
-              <span class="download-btn">Download</span>
-            </article>
-          </a>
-        `
-          )
-          .join("");
+  container.innerHTML = moviesToShow
+    .map((m, i) => `
+      <a href="download.html?i=${start + i}" class="movie-card-link" style="text-decoration:none;">
+        <div class="movie-card">
+          <img loading="lazy" src="${m["Poster URL"]}" alt="${m["Title"]}">
+          <span class="tag">${m["Language"] || m["Category"] || "HINDI"}</span>
+          <div class="card-body">
+            <div class="title">${m["Title"]} ${m["Year"] ? `(${m["Year"]})` : ""}</div>
+            <div class="platform">${m["Platform"] || m["Category"] || "Hindi Dubbed"}</div>
+          </div>
+        </div>
+      </a>
+    `)
+    .join("");
 
-        renderPagination(movies.length);
-      }
+  renderPagination(movies.length);
+}
+
 
       /**
        * Render pagination buttons based on total movies
