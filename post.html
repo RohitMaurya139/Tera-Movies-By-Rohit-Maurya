@@ -1,441 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MovieVerse | Movie-Page</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeraMovies | Movie-Page</title>
 
-    <!-- Link to external CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <!-- Shortcut icon / favicon -->
-    <link rel="shortcut icon" href="Capture.PNG" type="image/x-icon" />
-    <!-- Free Font Awesome CDN for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <header class="navbar">
-      <div class="logo-search">
-        <!-- Logo linked to homepage -->
-        <a href="index.html"><img class="logo" src="images/img.png" alt="logo" /></a>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Shortcut icon / favicon -->
+  <link rel="shortcut icon" href="Capture.PNG" type="image/x-icon" />
+  <!-- Free Font Awesome CDN for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css"
+  />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo-search">
+      <!-- Logo linked to homepage -->
+      <a href="index.html"><img class="logo" src="images/img.png" alt="logo" /></a>
 
-        <div class="search-box">
-          <!-- Search input box -->
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search movies..."
-            autocomplete="off"
-          />
-          <!-- Search button with icon -->
-          <button onclick="filterMovies()" title="Search" aria-label="Search">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="visually-hidden">Search</span>
-          </button>
-          <!-- Suggestions list for autocomplete -->
-          <ul
-            id="suggestions"
-            class="suggestions-list"
-            role="listbox"
-            aria-label="Search suggestions"
-          ></ul>
-        </div>
+      <div class="search-box">
+        <!-- Search input box -->
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search movies..."
+          autocomplete="off"
+        />
+        <!-- Search button with icon -->
+        <button onclick="filterMovies()" title="Search" aria-label="Search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <span class="visually-hidden">Search</span>
+        </button>
+        <!-- Suggestions list for autocomplete -->
+        <ul
+          id="suggestions"
+          class="suggestions-list"
+          role="listbox"
+          aria-label="Search suggestions"
+        ></ul>
       </div>
+    </div>
 
-      <div class="top-buttons">
-        <!-- Filter buttons by Category -->
-        <button class="btn filter-button" data-type="Category" data-value="Bollywood">
-          Bollywood
-        </button>
-        <button class="btn filter-button" data-type="Category" data-value="South Indian">
-          South Movies
-        </button>
-        <button class="btn filter-button" data-type="Category" data-value="Web Series">
-          WebSeries
-        </button>
-        <button class="btn filter-button" data-type="Category" data-value="Hollywood">
-          Hollywood
-        </button>
+    <div class="top-buttons">
+      <!-- Filter buttons by Category -->
+      <button class="btn filter-button" data-type="Category" data-value="Bollywood">
+        Bollywood
+      </button>
+      <button class="btn filter-button" data-type="Category" data-value="South Indian">
+        South Movies
+      </button>
+      <button class="btn filter-button" data-type="Category" data-value="Web Series">
+        WebSeries
+      </button>
+      <button class="btn filter-button" data-type="Category" data-value="Hollywood">
+        Hollywood
+      </button>
+    </div>
+  </header>
+
+  <!-- Navigation menu bar with dropdown filters -->
+  <nav class="menu-bar">
+    <!-- Year Dropdown Filter -->
+    <div class="dropdown">
+      <button class="dropbtn">
+        Year <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <!-- List of years with filter buttons -->
+        <button class="filter-button" data-type="Year" data-value="2025">2025</button>
+        <button class="filter-button" data-type="Year" data-value="2024">2024</button>
+        <button class="filter-button" data-type="Year" data-value="2023">2023</button>
+        <button class="filter-button" data-type="Year" data-value="2022">2022</button>
+        <button class="filter-button" data-type="Year" data-value="2021">2021</button>
+        <button class="filter-button" data-type="Year" data-value="2020">2020</button>
+        <button class="filter-button" data-type="Year" data-value="2019">2019</button>
+        <button class="filter-button" data-type="Year" data-value="2018">2018</button>
+        <button class="filter-button" data-type="Year" data-value="2017">2017</button>
+        <button class="filter-button" data-type="Year" data-value="2016">2016</button>
+        <button class="filter-button" data-type="Year" data-value="2015">2015</button>
+        <button class="filter-button" data-type="Year" data-value="2014">2014</button>
+        <button class="filter-button" data-type="Year" data-value="2013">2013</button>
+        <button class="filter-button" data-type="Year" data-value="2012">2012</button>
+        <button class="filter-button" data-type="Year" data-value="2011">2011</button>
+        <button class="filter-button" data-type="Year" data-value="2010">2010</button>
+        <button class="filter-button" data-type="Year" data-value="2009">2009</button>
+        <button class="filter-button" data-type="Year" data-value="2008">2008</button>
+        <button class="filter-button" data-type="Year" data-value="2007">2007</button>
+        <button class="filter-button" data-type="Year" data-value="2006">2006</button>
+        <button class="filter-button" data-type="Year" data-value="2005">2005</button>
+        <button class="filter-button" data-type="Year" data-value="2004">2004</button>
+        <button class="filter-button" data-type="Year" data-value="2003">2003</button>
+        <button class="filter-button" data-type="Year" data-value="2002">2002</button>
+        <button class="filter-button" data-type="Year" data-value="2001">2001</button>
+        <button class="filter-button" data-type="Year" data-value="2000">2000</button>
+        <button class="filter-button" data-type="Year" data-value="1999">1999</button>
+        <button class="filter-button" data-type="Year" data-value="1998">1998</button>
       </div>
-    </header>
+    </div>
 
-    <!-- Navigation menu bar with dropdown filters -->
-    <nav class="menu-bar">
-      <!-- Year Dropdown Filter -->
-      <div class="dropdown">
-        <button class="dropbtn">
-          Year <i class="fas fa-chevron-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <!-- List of years with filter buttons -->
-          <button class="filter-button" data-type="Year" data-value="2025">2025</button>
-          <button class="filter-button" data-type="Year" data-value="2024">2024</button>
-          <button class="filter-button" data-type="Year" data-value="2023">2023</button>
-          <button class="filter-button" data-type="Year" data-value="2022">2022</button>
-          <button class="filter-button" data-type="Year" data-value="2021">2021</button>
-          <button class="filter-button" data-type="Year" data-value="2020">2020</button>
-          <button class="filter-button" data-type="Year" data-value="2019">2019</button>
-          <button class="filter-button" data-type="Year" data-value="2018">2018</button>
-          <button class="filter-button" data-type="Year" data-value="2017">2017</button>
-          <button class="filter-button" data-type="Year" data-value="2016">2016</button>
-          <button class="filter-button" data-type="Year" data-value="2015">2015</button>
-          <button class="filter-button" data-type="Year" data-value="2014">2014</button>
-          <button class="filter-button" data-type="Year" data-value="2013">2013</button>
-          <button class="filter-button" data-type="Year" data-value="2012">2012</button>
-          <button class="filter-button" data-type="Year" data-value="2011">2011</button>
-          <button class="filter-button" data-type="Year" data-value="2010">2010</button>
-          <button class="filter-button" data-type="Year" data-value="2009">2009</button>
-          <button class="filter-button" data-type="Year" data-value="2008">2008</button>
-          <button class="filter-button" data-type="Year" data-value="2007">2007</button>
-          <button class="filter-button" data-type="Year" data-value="2006">2006</button>
-          <button class="filter-button" data-type="Year" data-value="2005">2005</button>
-          <button class="filter-button" data-type="Year" data-value="2004">2004</button>
-          <button class="filter-button" data-type="Year" data-value="2003">2003</button>
-          <button class="filter-button" data-type="Year" data-value="2002">2002</button>
-          <button class="filter-button" data-type="Year" data-value="2001">2001</button>
-          <button class="filter-button" data-type="Year" data-value="2000">2000</button>
-          <button class="filter-button" data-type="Year" data-value="1999">1999</button>
-          <button class="filter-button" data-type="Year" data-value="1998">1998</button>
-          <!-- Add more years as needed -->
-        </div>
+    <!-- Genre Dropdown Filter -->
+    <div class="dropdown">
+      <button class="dropbtn">
+        Genre <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <button class="filter-button" data-type="Genre" data-value="Action">Action</button>
+        <button class="filter-button" data-type="Genre" data-value="Drama">Drama</button>
+        <button class="filter-button" data-type="Genre" data-value="Adventure">Adventure</button>
+        <button class="filter-button" data-type="Genre" data-value="Thriller">Thriller</button>
+        <button class="filter-button" data-type="Genre" data-value="Mystery">Mystery</button>
+        <button class="filter-button" data-type="Genre" data-value="Family">Family</button>
+        <button class="filter-button" data-type="Genre" data-value="Fantasy">Fantasy</button>
+        <button class="filter-button" data-type="Genre" data-value="Romance">Romance</button>
       </div>
+    </div>
+  </nav>
 
-      <!-- Genre Dropdown Filter -->
-      <div class="dropdown">
-        <button class="dropbtn">
-          Genre <i class="fas fa-chevron-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <!-- List of genres with filter buttons -->
-          <button class="filter-button" data-type="Genre" data-value="Action">Action</button>
-          <button class="filter-button" data-type="Genre" data-value="Drama">Drama</button>
-          <button class="filter-button" data-type="Genre" data-value="Adventure">Adventure</button>
-          <button class="filter-button" data-type="Genre" data-value="Thriller">Thriller</button>
-          <button class="filter-button" data-type="Genre" data-value="Mystery">Mystery</button>
-          <button class="filter-button" data-type="Genre" data-value="Family">Family</button>
-          <button class="filter-button" data-type="Genre" data-value="Fantasy">Fantasy</button>
-          <button class="filter-button" data-type="Genre" data-value="Romance">Romance</button>
-          <!-- Add more genres if needed -->
-        </div>
-      </div>
-    </nav>
-
-    <!-- Section with Telegram join button -->
-    <section class="filter-buttons">
-         <a href="https://t.me/teramoviesweb"><button class="telegram-btn">
+  <!-- Section with Telegram join button -->
+  <section class="filter-buttons">
+    <a href="https://t.me/teramoviesweb">
+      <button class="telegram-btn">
         <i class="fab fa-telegram-plane"></i> JOIN TELEGRAM
-      </button> </a>
-    </section>
+      </button>
+    </a>
+  </section>
 
-    <!-- Container for movie cards -->
+  <!-- Container for movie cards -->
   <section class="movie-grid" id="movieContainer">
-  <!-- Movie cards will be inserted here -->
-</section>
+    <!-- Movie cards will be inserted here -->
+  </section>
 
+  <!-- Pagination navigation -->
+  <div id="pagination" class="pagination-nav"></div>
 
-    <!-- Pagination navigation -->
-    <div id="pagination" class="pagination-nav"></div>
+  <!-- Footer section -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="#">About Us</a>
+      <a href="#">Report Broken Links</a>
+      <a href="#">Request Us</a>
+      <a href="#">DMCA</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Site Disclaimer</a>
+    </div>
+    <p>&copy; 2025 Movies Verse. All rights reserved.</p>
+  </footer>
 
-    <!-- Footer section -->
-    <footer class="site-footer">
-      <div class="footer-links">
-        <a href="#">About Us</a>
-        <a href="#">Report Broken Links</a>
-        <a href="#">Request Us</a>
-        <a href="#">DMCA</a>
-        <a href="#">Contact Us</a>
-        <a href="#">Site Disclaimer</a>
-      </div>
+  <script>
+    const SHEET_URL =
+      "https://opensheet.elk.sh/1JKDl8BP0YryYs5aOhVqV0K4zAhW0Qj3vhvo96Hx4lII/Original";
 
-      <p>&copy; 2025 Movies Verse. All rights reserved.</p>
-    </footer>
+    const MOVIES_PER_PAGE = 30; 
+    let movieData = []; 
+    let currentFilteredMovies = []; 
+    let currentPage = parseInt(new URLSearchParams(window.location.search).get("page")) || 1; 
 
-    <script>
-      // URL of the Google Sheets JSON data
-      const SHEET_URL =
-        "https://opensheet.elk.sh/1JKDl8BP0YryYs5aOhVqV0K4zAhW0Qj3vhvo96Hx4lII/Original";
+    const filterTitle = document.getElementById("filterTitle");
 
-      const MOVIES_PER_PAGE = 30; // Number of movies shown per page
-      let movieData = []; // Full dataset of movies
-      let currentFilteredMovies = []; // Movies after filtering
-      let currentPage =
-        parseInt(new URLSearchParams(window.location.search).get("page")) || 1; // Current pagination page
+    // Show shimmer placeholders while loading
+    function showShimmerPlaceholders(count = MOVIES_PER_PAGE) {
+      const container = document.getElementById("movieContainer");
+      let placeholders = "";
+      for (let i = 0; i < count; i++) {
+        placeholders += `<div class="shimmer"></div>`;
+      }
+      container.innerHTML = placeholders;
+    }
 
-      const filterTitle = document.getElementById("filterTitle");
+    // Render movies for current page
+    function renderMovies(movies, page = 1) {
+      const container = document.getElementById("movieContainer");
+      const start = (page - 1) * MOVIES_PER_PAGE;
+      const end = page * MOVIES_PER_PAGE;
+      const moviesToShow = movies.slice(start, end);
 
-      /**
-       * Show shimmer placeholder elements while loading data
-       * @param {number} count Number of placeholders to show (default MOVIES_PER_PAGE)
-       */
-      function showShimmerPlaceholders(count = MOVIES_PER_PAGE) {
-        const container = document.getElementById("movieContainer");
-        let placeholders = "";
-        for (let i = 0; i < count; i++) {
-          placeholders += `<div class="shimmer"></div>`;
-        }
-        container.innerHTML = placeholders;
+      if (moviesToShow.length === 0) {
+        container.innerHTML =
+          '<p style="color:white; text-align:center; width:100%;">No movies found.</p>';
+        renderPagination(0);
+        return;
       }
 
-      /**
-       * Render movie cards for the specified page
-       * @param {Array} movies - Array of movie objects to render
-       * @param {number} page - Page number to render
-       */
- function renderMovies(movies, page = 1) {
-  const container = document.getElementById("movieContainer");
-  const start = (page - 1) * MOVIES_PER_PAGE;
-  const end = page * MOVIES_PER_PAGE;
-  const moviesToShow = movies.slice(start, end);
+      container.innerHTML = moviesToShow
+        .map((m) => `
+          <a href="download.html?imdb=${encodeURIComponent(m["IMDB ID"])}" class="movie-card-link" style="text-decoration:none;">
+            <div class="movie-card">
+              <img loading="lazy" src="${m["Poster URL"]}" alt="${m["Title"]}" />
+              <span class="tag">${m["Language"] || m["Category"] || "HINDI"}</span>
+              <div class="card-body">
+                <div class="title">${m["Title"]} ${m["Year"] ? `(${m["Year"]})` : ""}</div>
+                <div class="rating">${m["Rating"] || "N/A"} ⭐</div>
+                <div class="platform">${m["Platform"] || m["Category"] || "Hindi Dubbed"}</div>
+              </div>
+            </div>
+          </a>
+        `)
+        .join("");
 
-  if (moviesToShow.length === 0) {
-    container.innerHTML =
-      '<p style="color:white; text-align:center; width:100%;">No movies found.</p>';
-    renderPagination(0);
-    return;
-  }
+      renderPagination(movies.length);
+    }
 
-  container.innerHTML = moviesToShow
-    .map((m, i) => `
-      <a href="download.html?i=${start + i}" class="movie-card-link" style="text-decoration:none;">
-        <div class="movie-card">
-          <img loading="lazy" src="${m["Poster URL"]}" alt="${m["Title"]}">
-          <span class="tag">${m["Language"] || m["Category"] || "HINDI"}</span>
-          <div class="card-body">
-            <div class="title">${m["Title"]} ${m["Year"] ? `(${m["Year"]})` : ""}</div>
-            <div class="rating">${m["Rating"] || "N/A"} ⭐</div>
-<!-- Added rating here -->
-            <div class="platform">${m["Platform"] || m["Category"] || "Hindi Dubbed"}</div>
-          </div>
-        </div>
-      </a>
-    `)
-    .join("");
+    // Render pagination buttons
+    function renderPagination(totalMovies) {
+      const pagination = document.getElementById("pagination");
+      const totalPages = Math.ceil(totalMovies / MOVIES_PER_PAGE);
+      let buttons = "";
 
-  renderPagination(movies.length);
-}
-
-
-      /**
-       * Render pagination buttons based on total number of movies
-       * @param {number} totalMovies - Total movies available after filtering
-       */
-      function renderPagination(totalMovies) {
-        const pagination = document.getElementById("pagination");
-        const totalPages = Math.ceil(totalMovies / MOVIES_PER_PAGE);
-        let buttons = "";
-
-        for (let i = 1; i <= totalPages; i++) {
-          if (i === 1) {
-            buttons += `<a href="index.html"><button class="page-btn">${i}</button></a>`;
-          } else {
-            buttons += `<a href="post.html?page=${i}"><button class="page-btn">${i}</button></a>`;
-          }
-        }
-
-        pagination.innerHTML = buttons;
-      }
-
-      /**
-       * Changes the current page and rerenders the movies
-       * @param {number} page - Target page number
-       */
-      function goToPage(page) {
-        currentPage = page;
-        renderMovies(
-          currentFilteredMovies.length ? currentFilteredMovies : movieData,
-          currentPage
-        );
-      }
-
-      /**
-       * Load movies from SHEET_URL, show placeholders during loading
-       */
-      async function loadMovies() {
-        showShimmerPlaceholders();
-        try {
-          const res = await fetch(SHEET_URL);
-          movieData = await res.json();
-          currentFilteredMovies = [...movieData];
-          renderMovies(movieData, currentPage);
-        } catch (error) {
-          document.getElementById("movieContainer").innerHTML =
-            '<p style="color:red; text-align:center; width:100%;">Failed to load movies.</p>';
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === currentPage) {
+          buttons += `<button class="page-btn" aria-current="page" disabled>${i}</button>`;
+        } else if (i === 1) {
+          buttons += `<a href="index.html"><button class="page-btn">${i}</button></a>`;
+        } else {
+          buttons += `<a href="post.html?page=${i}"><button class="page-btn">${i}</button></a>`;
         }
       }
 
-      /**
-       * Filter movies by search query and render results with pagination reset
-       */
-      function filterMovies() {
-        const query = document.getElementById("searchInput").value.toLowerCase();
-        currentPage = 1;
-        const filtered = movieData.filter(
-          (m) =>
-            m["Title"].toLowerCase().includes(query) ||
-            m["Genre"].toLowerCase().includes(query) ||
-            m["Tags"].toLowerCase().includes(query)
-        );
-        currentFilteredMovies = filtered;
-        renderMovies(filtered, currentPage);
+      pagination.innerHTML = buttons;
+    }
 
-        if (filterTitle) {
-          filterTitle.textContent =
-            query.length > 0 ? `Search Results for "${query}"` : "All Movies";
-        }
+    function goToPage(page) {
+      if (page === currentPage) return;
+      currentPage = page;
+      renderMovies(
+        currentFilteredMovies.length ? currentFilteredMovies : movieData,
+        currentPage
+      );
+    }
+
+    // Load movies on startup
+    async function loadMovies() {
+      showShimmerPlaceholders();
+      try {
+        const res = await fetch(SHEET_URL);
+        movieData = await res.json();
+        currentFilteredMovies = [...movieData];
+        renderMovies(movieData, currentPage);
+      } catch (error) {
+        document.getElementById("movieContainer").innerHTML =
+          '<p style="color:red; text-align:center; width:100%;">Failed to load movies.</p>';
+        console.error("Error loading movie data:", error);
+      }
+    }
+
+    // Filter movies from search input
+    function filterMovies() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      currentPage = 1;
+
+      const filtered = movieData.filter(
+        (m) =>
+          m["Title"].toLowerCase().includes(query) ||
+          m["Genre"].toLowerCase().includes(query) ||
+          m["Tags"].toLowerCase().includes(query)
+      );
+      currentFilteredMovies = filtered;
+      renderMovies(filtered, currentPage);
+
+      filterTitle.textContent = query.length
+        ? `Search Results for "${query}"`
+        : "All Movies";
+    }
+
+    // Apply filter by button click (Category, Year, Genre)
+    function applyFilter(type, value) {
+      currentPage = 1;
+
+      const filtered = movieData.filter(
+        (movie) =>
+          movie[type] && movie[type].toLowerCase().includes(value.toLowerCase())
+      );
+
+      currentFilteredMovies = filtered;
+      renderMovies(filtered, currentPage);
+
+      if (
+        type === "Category" &&
+        (value.toLowerCase() === "bollywood" || value.toLowerCase() === "hollywood")
+      ) {
+        filterTitle.textContent = `${value} Movies`;
+      } else if (type === "Genre" || type === "Category") {
+        filterTitle.textContent = `${value} Movies`;
+      } else {
+        filterTitle.textContent = "All Movies";
+      }
+    }
+
+    // Event listener for filter buttons (using event delegation)
+    document.addEventListener("click", function (e) {
+      if (e.target.classList.contains("filter-button")) {
+        const type = e.target.getAttribute("data-type");
+        const value = e.target.getAttribute("data-value");
+        applyFilter(type, value);
+      }
+    });
+
+    // Enable search by Enter key
+    document.getElementById("searchInput").addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        filterMovies();
+      }
+    });
+
+    // Autocomplete suggestion behavior
+    const searchInput = document.getElementById("searchInput");
+    const suggestions = document.getElementById("suggestions");
+    let selectedIndex = -1;
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase().trim();
+      if (!query) {
+        suggestions.innerHTML = "";
+        suggestions.style.display = "none";
+        selectedIndex = -1;
+        return;
       }
 
-      /**
-       * Apply filter based on type (Category, Year, Genre) and value, then render results
-       * @param {string} type - The property to filter by (e.g. "Category", "Year", "Genre")
-       * @param {string} value - The value to filter for
-       */
-      function applyFilter(type, value) {
-        currentPage = 1;
-        const filtered = movieData.filter(
-          (movie) =>
-            movie[type] &&
-            movie[type].toLowerCase().includes(value.toLowerCase())
-        );
-        currentFilteredMovies = filtered;
-        renderMovies(filtered, currentPage);
+      const matched = movieData
+        .filter(m => m.Title && m.Title.toLowerCase().startsWith(query))
+        .slice(0, 10);
 
-        if (filterTitle) {
-          if (
-            type === "Category" &&
-            (value.toLowerCase() === "bollywood" || value.toLowerCase() === "hollywood")
-          ) {
-            filterTitle.textContent = `${value} Movies`;
-          } else if (type === "Genre" || type === "Category") {
-            filterTitle.textContent = `${value} Movies`;
-          } else {
-            filterTitle.textContent = "All Movies";
-          }
-        }
+      suggestions.innerHTML = matched.length
+        ? matched.map((m,i) => `<li role="option" tabindex="0" data-title="${m.Title}" id="suggestion-${i}">${m.Title}</li>`).join("")
+        : "<li>No suggestions found</li>";
+      suggestions.style.display = "block";
+      selectedIndex = -1;
+    });
+
+    suggestions.addEventListener("click", (e) => {
+      if (e.target && e.target.tagName === "LI" && e.target.dataset.title) {
+        searchInput.value = e.target.dataset.title;
+        suggestions.innerHTML = "";
+        suggestions.style.display = "none";
+        filterMovies();
       }
+    });
 
-      // Event listener for all filter-button clicks (delegated)
-      document.addEventListener("click", function (e) {
-        if (e.target.classList.contains("filter-button")) {
-          const type = e.target.getAttribute("data-type");
-          const value = e.target.getAttribute("data-value");
-          applyFilter(type, value);
-        }
-      });
+    searchInput.addEventListener("keydown", (e) => {
+      const items = suggestions.querySelectorAll("li");
+      if (!items.length) return;
 
-      // Enable search on Enter keypress in search input
-      document.getElementById("searchInput").addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-          filterMovies();
-        }
-      });
-
-      // Initial load of movie data
-      loadMovies();
-    </script>
-
-    <!-- SDK script for ads or services -->
-  <!-- Monetag -->
-<script src="https://fpyf8.com/88/tag.min.js" data-zone="159444" async data-cfasync="false"></script>
-
-    <script>
-      // Elements for search suggestions
-      const searchInput = document.getElementById("searchInput");
-      const suggestions = document.getElementById("suggestions");
-
-      // Listen to input event on search box to show matching suggestions
-      searchInput.addEventListener("input", function () {
-        const query = this.value.toLowerCase().trim();
-
-        // Clear suggestions if query empty
-        if (!query) {
-          suggestions.innerHTML = "";
-          suggestions.style.display = "none";
-          return;
-        }
-
-        // Filter movie titles that start with query, limit to 10 suggestions
-        const matched = movieData
-          .filter((movie) => movie.Title.toLowerCase().startsWith(query))
-          .slice(0, 10);
-
-        if (matched.length === 0) {
-          // Show no suggestions message
-          suggestions.innerHTML = "<li>No suggestions found</li>";
-          suggestions.style.display = "block";
-          return;
-        }
-
-        // Build suggestions list items with ARIA roles and data attributes
-        suggestions.innerHTML = matched
-          .map(
-            (movie) =>
-              `<li role="option" tabindex="0" data-title="${movie.Title}">${movie.Title}</li>`
-          )
-          .join("");
-        suggestions.style.display = "block";
-      });
-
-      // Handle click on suggestion item to select it
-      suggestions.addEventListener("click", function (e) {
-        if (e.target && e.target.tagName === "LI" && e.target.dataset.title) {
-          searchInput.value = e.target.dataset.title;
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        selectedIndex = (selectedIndex + 1) % items.length;
+        updateAriaSelected(items);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+        updateAriaSelected(items);
+      } else if (e.key === "Enter") {
+        if (selectedIndex >= 0 && items[selectedIndex]) {
+          e.preventDefault();
+          searchInput.value = items[selectedIndex].dataset.title;
           suggestions.innerHTML = "";
           suggestions.style.display = "none";
           filterMovies();
-        }
-      });
-
-      // Keyboard navigation in suggestions (arrow up/down and enter)
-      let selectedIndex = -1;
-      searchInput.addEventListener("keydown", function (e) {
-        const items = suggestions.querySelectorAll("li");
-        if (!items.length) return;
-
-        if (e.key === "ArrowDown") {
-          e.preventDefault();
-          selectedIndex = (selectedIndex + 1) % items.length;
-          updateAriaSelected(items);
-        } else if (e.key === "ArrowUp") {
-          e.preventDefault();
-          selectedIndex = (selectedIndex - 1 + items.length) % items.length;
-          updateAriaSelected(items);
-        } else if (e.key === "Enter") {
-          if (selectedIndex >= 0 && items[selectedIndex]) {
-            e.preventDefault();
-            searchInput.value = items[selectedIndex].dataset.title;
-            suggestions.innerHTML = "";
-            suggestions.style.display = "none";
-            filterMovies();
-            selectedIndex = -1;
-          }
-        }
-      });
-
-      /**
-       * Updates ARIA-selected attribute and focus for suggestions list items
-       * @param {NodeListOf<Element>} items 
-       */
-      function updateAriaSelected(items) {
-        items.forEach((item, idx) => {
-          if (idx === selectedIndex) {
-            item.setAttribute("aria-selected", "true");
-            item.focus();
-          } else {
-            item.removeAttribute("aria-selected");
-          }
-        });
-      }
-
-      // Hide suggestions when clicking outside of input and suggestions list
-      document.addEventListener("click", function (e) {
-        if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
-          suggestions.innerHTML = "";
-          suggestions.style.display = "none";
           selectedIndex = -1;
         }
+      }
+    });
+
+    function updateAriaSelected(items) {
+      items.forEach((item, idx) => {
+        if (idx === selectedIndex) {
+          item.setAttribute("aria-selected", "true");
+          item.focus();
+        } else {
+          item.removeAttribute("aria-selected");
+        }
       });
-    </script>
-  </body>
+    }
+
+    document.addEventListener("click", (e) => {
+      if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+        suggestions.innerHTML = "";
+        suggestions.style.display = "none";
+        selectedIndex = -1;
+      }
+    });
+
+    // Initial load
+    loadMovies();
+  </script>
+
+  <!-- SDK script for ads or services -->
+  <!-- Monetag -->
+  <script src="https://fpyf8.com/88/tag.min.js" data-zone="159444" async data-cfasync="false"></script>
+</body>
 </html>
