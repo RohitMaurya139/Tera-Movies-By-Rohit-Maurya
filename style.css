@@ -33,7 +33,7 @@ body {
 }
 .logo {
   width: 130px;
-  height: auto;
+  height: 110px;
 }
 .logo:hover {
   transform: scale(1.05);
