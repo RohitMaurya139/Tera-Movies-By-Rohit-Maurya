@@ -1,315 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TeraMovies | Download</title>
-    <link rel="stylesheet" href="style.css" />
-    <!-- Telegram Web App SDK -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  </head>
- <body>
-    <header class="navbar">
-      <div class="logo-search">
-        <!-- Logo linked to homepage -->
-        <a href="index.html"><img class="logo" src="images/img.png" alt="logo" /></a>
-        <div class="search-box">
-          <!-- Search input box -->
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search movies..."
-            autocomplete="off"
-          />
-          <!-- Search button with icon -->
-          <button onclick="filterMovies()" title="Search" aria-label="Search">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="visually-hidden">Search</span>
-          </button>
-          <!-- Suggestions list for autocomplete -->
-          <ul
-            id="suggestions"
-            class="suggestions-list"
-            role="listbox"
-            aria-label="Search suggestions"
-          ></ul>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TeraMovies | Download</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Telegram Web App SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo-search">
+      <!-- Logo linked to homepage -->
+      <a href="index.html"><img class="logo" src="images/img.png" alt="logo" /></a>
+      <div class="search-box">
+        <!-- Search input box -->
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search movies..."
+          autocomplete="off"
+        />
+        <!-- Search button with icon -->
+        <button onclick="filterMovies()" title="Search" aria-label="Search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <span class="visually-hidden">Search</span>
+        </button>
+        <!-- Suggestions list for autocomplete -->
+        <ul
+          id="suggestions"
+          class="suggestions-list"
+          role="listbox"
+          aria-label="Search suggestions"
+        ></ul>
+      </div>
+    </div>
+
+    <div class="top-buttons">
+      <!-- Filter buttons for movie categories -->
+      <button class="btn filter-button" data-type="Category" data-value="Bollywood">
+        Bollywood
+      </button>
+      <button
+        class="btn filter-button"
+        data-type="Category"
+        data-value="South Indian"
+      >
+        South Movies
+      </button>
+      <button class="btn filter-button" data-type="Category" data-value="Web Series">
+        WebSeries
+      </button>
+      <button class="btn filter-button" data-type="Category" data-value="Hollywood">
+        Hollywood
+      </button>
+    </div>
+    <!-- Placeholder for Category Dropdown if needed in future -->
+  </header>
+
+  <!-- Section Title -->
+  <section class="downloadSection">
+    <h1 class="movie-title">Loading...</h1>
+  </section>
+
+  <!-- Movie Details Section -->
+  <section class="movies">
+    <div class="movie-Download-card">
+      <div class="main-poster">
+        <!-- Movie poster image -->
+        <img src="" alt="Movie Poster" class="main-movie-img" />
+        <!-- New container for movie details below poster -->
+        <div class="movie-info"></div>
       </div>
 
-      <div class="top-buttons">
-        <!-- Filter buttons for movie categories -->
-        <button class="btn filter-button" data-type="Category" data-value="Bollywood">
-          Bollywood
-        </button>
-        <button
-          class="btn filter-button"
-          data-type="Category"
-          data-value="South Indian"
-        >
-          South Movies
-        </button>
-        <button class="btn filter-button" data-type="Category" data-value="Web Series">
-          WebSeries
-        </button>
-        <button class="btn filter-button" data-type="Category" data-value="Hollywood">
-          Hollywood
-        </button>
+      <!-- video Player implemented here (currently commented out) -->
+      <!--
+      <div class="video-player">
+        <video controls>
+          <source src="" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <!-- Placeholder for Category Dropdown if needed in future -->
-    </header>
+      -->
 
-    <!-- Section Title -->
-    <section class="downloadSection">
-      
-        <h1 class="movie-title">Loading...</h1> 
-      
-    </section>
+      <!-- Download links will be dynamically injected here -->
 
-    <!-- Movie Details Section -->
-    <section class="movies">
-      <div class="movie-Download-card">
-       
-        <div class="main-poster">
-          <!-- Movie poster image -->
-          <img src="" alt="Movie Poster" class="main-movie-img" />
-          <!-- New container for movie details below poster -->
-          <div class="movie-info"></div>
-        </div>
-        <!-- Movie title -->
-       
-
-        <!-- video Player implemented here (currently commented out) -->
-        <!--
-        <div class="video-player">
-          <video controls>
-            <source src="" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        -->
-
-        <!-- Download links will be dynamically injected here -->
-    
-
-        <!-- Movie description section -->
-        <div class="description">
-          <h2>Description</h2>
-          <p class="movie-description">Loading movie details...</p>
-        </div>
+      <!-- Movie description section -->
+      <div class="description">
+        <h2>Description</h2>
+        <p class="movie-description">Loading movie details...</p>
       </div>
-<h1 id="link-btn-des">👇Single click Download link👇</h1>
-          <div class="download-links">
-            
-          </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="footer-links">
-        <a href="#">About</a>
-        <a href="#">DMCA</a>
-        <a href="#">Contact</a>
-      </div>
-      <p>&copy; 2025 TeraMovies. All rights reserved.</p>
-    </footer>
+    <h1 id="link-btn-des">👇Single click Download link👇</h1>
+    <div class="download-links"></div>
+  </section>
 
-    <script>
-      // Initialize Telegram Web App features
-      Telegram.WebApp.ready();
-      Telegram.WebApp.expand();
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">DMCA</a>
+      <a href="#">Contact</a>
+    </div>
+    <p>&copy; 2025 TeraMovies. All rights reserved.</p>
+  </footer>
 
-      // URL to the Google Sheets data published as JSON via opensheet.elk.sh
-      const SHEET_URL =
-        "https://opensheet.elk.sh/1JKDl8BP0YryYs5aOhVqV0K4zAhW0Qj3vhvo96Hx4lII/Original";
+  <script>
+    // Initialize Telegram Web App features
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
 
-      // Load movie details based on the index parameter "i" in the URL query string
-      async function loadMovieDetails() {
-        const index = new URLSearchParams(window.location.search).get("i");
-        if (!index || isNaN(index)) return; // Basic guard
+    const SHEET_URL = "https://opensheet.elk.sh/1JKDl8BP0YryYs5aOhVqV0K4zAhW0Qj3vhvo96Hx4lII/Original";
 
-        try {
-          const res = await fetch(SHEET_URL);
-          if (!res.ok) throw new Error("Failed to load movie data");
-          const data = await res.json();
-          const movie = data[parseInt(index)];
+    async function loadMovieDetails() {
+      // Get imdb id from URL param (e.g. download.html?imdb=tt12345678)
+      const imdbId = new URLSearchParams(window.location.search).get("imdb");
+      if (!imdbId) {
+        document.querySelector(".movie-title").textContent = "Movie ID not provided.";
+        return;
+      }
 
-          if (!movie) return;
+      try {
+        const res = await fetch(SHEET_URL);
+        if (!res.ok) throw new Error("Failed to load movie data");
+        const data = await res.json();
 
-          // Update poster image and alt text
-          const posterImg = document.querySelector(".main-movie-img");
-          posterImg.src = movie["Poster URL"] || "";
-          posterImg.alt = movie["Title"] || "Movie Poster";
+        // Find the movie by IMDB ID (case sensitive)
+        const movie = data.find(m => m["IMDB ID"] === imdbId);
 
-          // Update movie title
-          document.querySelector(".movie-title").textContent = movie["Title"] || "Untitled";
-
-          // Update movie description
-          document.querySelector(".movie-description").textContent = movie["Storyline"] || "No description available.";
-
-          // Inject download links, hide if not present
-          const dl480 = movie["Download 480p"];
-          const dl720 = movie["Download 720p"];
-          const dl1080 = movie["Download 1080p"];
-
-          const downloadLinksDiv = document.querySelector(".download-links");
-          let linksHtml = "";
-          if (dl480) {
-            linksHtml += `<a href="${dl480}" class="btn" target="_blank" rel="noopener noreferrer">Download 480p</a>`;
-          }
-          if (dl720) {
-            linksHtml += `<a href="${dl720}" class="btn" target="_blank" rel="noopener noreferrer">Download 720p</a>`;
-          }
-          if (dl1080) {
-            linksHtml += `<a href="${dl1080}" class="btn" target="_blank" rel="noopener noreferrer">Download 1080p</a>`;
-          }
-          if (!linksHtml) {
-            linksHtml = '<p style="color: #999; font-style: italic;">Download links not available.</p>';
-          }
-          downloadLinksDiv.innerHTML = linksHtml;
-
-          // Movie information block below poster
-          const infoContainer = document.querySelector(".movie-info");
-          infoContainer.innerHTML = `
-            <p><strong>Title:</strong> ${movie["Title"] || "N/A"}</p>
-            <p><strong>Year:</strong> ${movie["Year"] || "N/A"}</p>
-            <p><strong>Language:</strong> ${movie["Language"] || "N/A"}</p>
-            <p><strong>Category:</strong> ${movie["Category"] || "N/A"}</p>
-            <p><strong>Genre:</strong> ${movie["Genre"] || "N/A"}</p>
-            <p><strong>Tags:</strong> ${movie["Tags"] || "N/A"}</p>
-            <p><strong>Rating:</strong> ${movie["Rating"] || "N/A"} ⭐</p>
-            <p><strong>Duration:</strong> ${movie["Duration"] || "N/A"}</p>
-            <p><strong>Director:</strong> ${movie["Director"] || "N/A"}</p>
-            <p><strong>Awards:</strong> ${movie["Awards"] || "N/A"}</p>
-            <p><strong>IMDB ID:</strong> ${movie["IMDB ID"] || "N/A"}</p>
-          `;
-        } catch (error) {
-          console.error("Error loading movie details:", error);
-          // Optionally show error message in UI
-          document.querySelector(".movie-title").textContent = "Failed to load movie details.";
+        if (!movie) {
+          document.querySelector(".movie-title").textContent = "Movie not found.";
           document.querySelector(".movie-description").textContent = "";
           document.querySelector(".movie-info").innerHTML = "";
           document.querySelector(".download-links").innerHTML = "";
           document.querySelector(".main-movie-img").src = "";
+          return;
         }
+
+        // Update poster image and alt text
+        const posterImg = document.querySelector(".main-movie-img");
+        posterImg.src = movie["Poster URL"] || "";
+        posterImg.alt = movie["Title"] || "Movie Poster";
+
+        // Update movie title
+        document.querySelector(".movie-title").textContent = movie["Title"] || "Untitled";
+
+        // Update movie description
+        document.querySelector(".movie-description").textContent = movie["Storyline"] || "No description available.";
+
+        // Inject download links, only if available
+        const dl480 = movie["Download 480p"];
+        const dl720 = movie["Download 720p"];
+        const dl1080 = movie["Download 1080p"];
+
+        const downloadLinksDiv = document.querySelector(".download-links");
+        let linksHtml = "";
+
+        if (dl480) {
+          linksHtml += `<a href="${dl480}" class="btn" target="_blank" rel="noopener noreferrer">Download 480p</a>`;
+        }
+        if (dl720) {
+          linksHtml += `<a href="${dl720}" class="btn" target="_blank" rel="noopener noreferrer">Download 720p</a>`;
+        }
+        if (dl1080) {
+          linksHtml += `<a href="${dl1080}" class="btn" target="_blank" rel="noopener noreferrer">Download 1080p</a>`;
+        }
+        if (!linksHtml) {
+          linksHtml = '<p style="color: #999; font-style: italic;">Download links not available.</p>';
+        }
+        downloadLinksDiv.innerHTML = linksHtml;
+
+        // Movie information block below poster
+        const infoContainer = document.querySelector(".movie-info");
+        infoContainer.innerHTML = `
+          <p><strong>Title:</strong> ${movie["Title"] || "N/A"}</p>
+          <p><strong>Year:</strong> ${movie["Year"] || "N/A"}</p>
+          <p><strong>Language:</strong> ${movie["Language"] || "N/A"}</p>
+          <p><strong>Category:</strong> ${movie["Category"] || "N/A"}</p>
+          <p><strong>Genre:</strong> ${movie["Genre"] || "N/A"}</p>
+          <p><strong>Tags:</strong> ${movie["Tags"] || "N/A"}</p>
+          <p><strong>Rating:</strong> ${movie["Rating"] || "N/A"} ⭐</p>
+          <p><strong>Duration:</strong> ${movie["Duration"] || "N/A"}</p>
+          <p><strong>Director:</strong> ${movie["Director"] || "N/A"}</p>
+          <p><strong>Awards:</strong> ${movie["Awards"] || "N/A"}</p>
+          <p><strong>IMDB ID:</strong> ${movie["IMDB ID"] || "N/A"}</p>
+        `;
+
+      } catch (error) {
+        console.error("Error loading movie details:", error);
+        document.querySelector(".movie-title").textContent = "Failed to load movie details.";
+        document.querySelector(".movie-description").textContent = "";
+        document.querySelector(".movie-info").innerHTML = "";
+        document.querySelector(".download-links").innerHTML = "";
+        document.querySelector(".main-movie-img").src = "";
+      }
+    }
+
+    // Run the function after page load
+    loadMovieDetails();
+  </script>
+
+  <!-- SDK script for ads or other services -->
+  <!-- Monetag -->
+  <script src="https://fpyf8.com/88/tag.min.js" data-zone="159444" async data-cfasync="false"></script>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const suggestions = document.getElementById("suggestions");
+
+    // Listen to input in search box to show suggestions
+    searchInput.addEventListener("input", function () {
+      const query = this.value.toLowerCase().trim();
+
+      if (!query) {
+        suggestions.innerHTML = "";
+        suggestions.style.display = "none";
+        return;
       }
 
-      // Execute loading of movie details on page load
-      loadMovieDetails();
-    </script>
+      // Note: movieData is undefined here; this assumes you invoke filterMovies() on main page, or remove if unnecessary on this page.
+      // If you want to fix autocomplete here, you need to load movie data similarly.
 
-    <!-- SDK script for ads or other services -->
-    <!-- Monetag -->
-    <script src="https://fpyf8.com/88/tag.min.js" data-zone="159444" async data-cfasync="false"></script>
+      // For now, hide suggestions on download page
+      suggestions.innerHTML = "";
+      suggestions.style.display = "none";
+    });
 
-    <script>
-      const searchInput = document.getElementById("searchInput");
-      const suggestions = document.getElementById("suggestions");
-
-      // Listen to input in search box to show suggestions
-      searchInput.addEventListener("input", function () {
-        const query = this.value.toLowerCase().trim();
-
-        // Clear previous suggestions if input is empty
-        if (!query) {
-          suggestions.innerHTML = "";
-          suggestions.style.display = "none";
-          return;
-        }
-
-        if (typeof movieData === "undefined" || !Array.isArray(movieData)) {
-          // movieData not defined or invalid
-          suggestions.innerHTML = "<li>No movie data available</li>";
-          suggestions.style.display = "block";
-          return;
-        }
-
-        // Filter movie data to find titles that start with the query (max 10)
-        const matched = movieData
-          .filter((movie) => movie.Title && movie.Title.toLowerCase().startsWith(query))
-          .slice(0, 10);
-
-        if (matched.length === 0) {
-          // Show no suggestions message
-          suggestions.innerHTML = "<li>No suggestions found</li>";
-          suggestions.style.display = "block";
-          return;
-        }
-
-        // Create suggestion list items with proper roles and data attribute
-        suggestions.innerHTML = matched
-          .map(
-            (movie) =>
-              `<li role="option" tabindex="0" data-title="${movie.Title}">${movie.Title}</li>`
-          )
-          .join("");
-        suggestions.style.display = "block";
-      });
-
-      // Handle clicking on a suggestion from the list
-      suggestions.addEventListener("click", function (e) {
-        if (e.target && e.target.tagName === "LI" && e.target.dataset.title) {
-          // Set input to selected movie title
-          searchInput.value = e.target.dataset.title;
-          // Hide suggestions
-          suggestions.innerHTML = "";
-          suggestions.style.display = "none";
-          // Trigger filtering of movies based on selection
-          filterMovies();
-        }
-      });
-
-      // Handle keyboard navigation (arrow up/down and enter) for suggestions
-      let selectedIndex = -1;
-      searchInput.addEventListener("keydown", function (e) {
-        const items = suggestions.querySelectorAll("li");
-        if (!items.length) return;
-
-        if (e.key === "ArrowDown") {
-          e.preventDefault();
-          selectedIndex = (selectedIndex + 1) % items.length;
-          updateAriaSelected(items);
-        } else if (e.key === "ArrowUp") {
-          e.preventDefault();
-          selectedIndex = (selectedIndex - 1 + items.length) % items.length;
-          updateAriaSelected(items);
-        } else if (e.key === "Enter") {
-          if (selectedIndex >= 0 && items[selectedIndex]) {
-            e.preventDefault();
-            // Set input value to the selected suggestion
-            searchInput.value = items[selectedIndex].dataset.title;
-            // Hide suggestions
-            suggestions.innerHTML = "";
-            suggestions.style.display = "none";
-            // Filter movies based on selected suggestion
-            filterMovies();
-            selectedIndex = -1;
-          }
-        }
-      });
-
-      /**
-       * Highlights the currently selected suggestion and manages ARIA attributes
-       * @param {NodeListOf<Element>} items - List of suggestion list items
-       */
-      function updateAriaSelected(items) {
-        items.forEach((item, idx) => {
-          if (idx === selectedIndex) {
-            item.setAttribute("aria-selected", "true");
-            item.focus();
-          } else {
-            item.removeAttribute("aria-selected");
-          }
-        });
-      }
-
-      // Hide suggestions if clicking outside search input or suggestions list
-      document.addEventListener("click", function (e) {
-        if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
-          suggestions.innerHTML = "";
-          suggestions.style.display = "none";
-          selectedIndex = -1;
-        }
-      });
-    </script>
-  </body>
+    // Additional search/autocomplete related code can be added if data is available here
+  </script>
+</body>
 </html>
